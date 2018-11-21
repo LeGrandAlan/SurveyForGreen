@@ -1,3 +1,4 @@
+'use strict';
 // On récupère les librairies
 const url = require("url");
 const http = require('http');
@@ -27,12 +28,13 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
             '<html>' +
             '    <head>' +
             '        <meta charset="utf-8" />' +
-            '        <title>index</title>' +
             '    </head>' +
             '    <body>' +
-            '     	<p><h1>Page index !</h1></p>' +
+            '     	Page index !' +
             '    </body>' +
             '</html>');
+
+
         res.end(); // On termine notre communication avec le serveur
 
 
