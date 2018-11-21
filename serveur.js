@@ -3,6 +3,7 @@
 const url = require("url");
 const http = require('http');
 const querystring = require('querystring');
+const fs = require("fs");
 
 // On créer notre serveur
 let server = http.createServer(function (req, res) { // On reçoit la demande de connexion du client
@@ -20,22 +21,27 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
         res.writeHead(200, {"Content-Type": "text/html"});
         if ('token' in params) { // Si il y a un nom et un prnom dans l'url
             res.write('Vous avez le token ' + params['token']);
+            try {
+                let content = fs.readFileSync("./data/" + params['token'] + '.json');
+
+                console.log(content);
+            } catch (e) {
+                console.log("sdgsgq");
+            }
         }
 
         // ------------------ Envoit d'un code html -----------------------------
-        // On envoit notre réponse
-        res.write('<!DOCTYPE html>' +
-            '<html>' +
-            '    <head>' +
-            '        <meta charset="utf-8" />' +
-            '    </head>' +
-            '    <body>' +
-            '     	Page index !' +
-            '    </body>' +
-            '</html>');
+        fs.readFile('./view/index.html', null, (err, data) => {
+            if(err){
+                res.writeHead(404, {"Content-Type": "text/plain"});
+                res.write('Erreur 404 : Page introuvable');
+                res.end(); // On termine notre communication avec le serveur
+            } else {
+                res.write(data);
+                res.end(); // On termine notre communication avec le serveur
+            }
+        });
 
-
-        res.end(); // On termine notre communication avec le serveur
 
 
     } else {
