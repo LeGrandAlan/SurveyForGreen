@@ -1,0 +1,9 @@
+{
+  "name": "SurveyForGreen",
+  "version": "1.0.0",
+  "dependencies": {
+    "accepts": "^1.3.5",
+    "iltorb": "^2.4.1",
+    "lzma-native": "^4.0.3"
+  }
+}

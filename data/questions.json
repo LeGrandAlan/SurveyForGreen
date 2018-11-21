@@ -153,7 +153,7 @@
   },
   "6": {
     "answer_type": 1,
-    "question_name": "Ecoconception good practices:\n Do you apply the rules and best practices for digital accessibility?",
+    "question_name": "Ecoconception good practices:\\n Do you apply the rules and best practices for digital accessibility?",
     "choices": [
       {
         "id_choice": 1,
@@ -174,7 +174,7 @@
   },
   "7": {
     "answer_type": 1,
-    "question_name": "Ecoconception good practices:\nHave you optimized the states and printouts in your application tools (reduced number of pages when printing, ink consumption ...)",
+    "question_name": "Ecoconception good practices:\\nHave you optimized the states and printouts in your application tools (reduced number of pages when printing, ink consumption ...)",
     "choices": [
       {
         "id_choice": 1,
@@ -195,7 +195,7 @@
   },
   "8": {
     "answer_type": 1,
-    "question_name": "Ecoconception good practices:\nDo you integrate the principles of the ecodesign of digital services?",
+    "question_name": "Ecoconception good practices:\\nDo you integrate the principles of the ecodesign of digital services?",
     "choices": [
       {
         "id_choice": 1,
@@ -216,7 +216,7 @@
   },
   "9": {
     "answer_type": 1,
-    "question_name": "Ecoconception good practices:\nDo you use a modular application architecture?",
+    "question_name": "Ecoconception good practices:\\nDo you use a modular application architecture?",
     "choices": [
       {
         "id_choice": 1,
@@ -237,7 +237,7 @@
   },
   "10": {
     "answer_type": 1,
-    "question_name": "Ecoconception good practices:\nDo you do a design review at the end of your application's development?",
+    "question_name": "Ecoconception good practices:\\nDo you do a design review at the end of your application's development?",
     "choices": [
       {
         "id_choice": 1,
@@ -386,7 +386,7 @@
   },
   "17": {
     "answer_type": 1,
-    "question_name": "What is the rate of charge or energy use of your computer rooms?\nRate = Electrical power absorbed by your IT equipment, divided by room capacity in kW, then multiplied by 100 (used energy / available energy)",
+    "question_name": "What is the rate of charge or energy use of your computer rooms?\\nRate = Electrical power absorbed by your IT equipment, divided by room capacity in kW, then multiplied by 100 (used energy / available energy)",
     "choices": [
       {
         "id_choice": 1,
@@ -413,7 +413,7 @@
   },
   "19": {
     "answer_type": 1,
-    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\nThe purchase of non-IT equipment from IT rooms (air conditioning, air treatment, inverters, etc.) according to energy efficiency criteria",
+    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\\nThe purchase of non-IT equipment from IT rooms (air conditioning, air treatment, inverters, etc.) according to energy efficiency criteria",
     "choices": [
       {
         "id_choice": 1,
@@ -434,7 +434,7 @@
   },
   "20": {
     "answer_type": 1,
-    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\nImplementing the good practices of the \"European Code of Conduct for DataCenter\"?",
+    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\\nImplementing the good practices of the \\"European Code of Conduct for DataCenter\\"?",
     "choices": [
       {
         "id_choice": 1,
@@ -455,7 +455,7 @@
   },
   "21": {
     "answer_type": 1,
-    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\nData center PUE tracking",
+    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\\nData center PUE tracking",
     "choices": [
       {
         "id_choice": 1,
@@ -476,7 +476,7 @@
   },
   "22": {
     "answer_type": 1,
-    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\nRegular monitoring of environmental indicators of computer rooms",
+    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\\nRegular monitoring of environmental indicators of computer rooms",
     "choices": [
       {
         "id_choice": 1,
@@ -497,7 +497,7 @@
   },
   "23": {
     "answer_type": 1,
-    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\nEnvironmental impact analysis of the datacenter in life cycle approach",
+    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\\nEnvironmental impact analysis of the datacenter in life cycle approach",
     "choices": [
       {
         "id_choice": 1,
@@ -518,7 +518,7 @@
   },
   "24": {
     "answer_type": 1,
-    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\nOptimizing the architecture and layout of room",
+    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\\nOptimizing the architecture and layout of room",
     "choices": [
       {
         "id_choice": 1,
@@ -539,7 +539,7 @@
   },
   "25": {
     "answer_type": 1,
-    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\nThe urbanization of halls in hot / cold aisles",
+    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\\nThe urbanization of halls in hot / cold aisles",
     "choices": [
       {
         "id_choice": 1,
@@ -560,7 +560,7 @@
   },
   "26": {
     "answer_type": 1,
-    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\nContainment of air flows (corridors)",
+    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\\nContainment of air flows (corridors)",
     "choices": [
       {
         "id_choice": 1,
@@ -581,7 +581,7 @@
   },
   "27": {
     "answer_type": 1,
-    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\nThe use of natural cooling sources (freecooling)",
+    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\\nThe use of natural cooling sources (freecooling)",
     "choices": [
       {
         "id_choice": 1,
@@ -602,7 +602,7 @@
   },
   "28": {
     "answer_type": 1,
-    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\nImplementation of a heat recovery system for computer rooms (heating)",
+    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\\nImplementation of a heat recovery system for computer rooms (heating)",
     "choices": [
       {
         "id_choice": 1,
@@ -623,7 +623,7 @@
   },
   "29": {
     "answer_type": 1,
-    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\nThe set temperature in the cold corridor remains higher than 24 °",
+    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\\nThe set temperature in the cold corridor remains higher than 24 °",
     "choices": [
       {
         "id_choice": 1,
@@ -644,7 +644,7 @@
   },
   "30": {
     "answer_type": 1,
-    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\n The choice of a modular datacenter architecture",
+    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\\n The choice of a modular datacenter architecture",
     "choices": [
       {
         "id_choice": 1,
@@ -665,7 +665,7 @@
   },
   "32": {
     "answer_type": 1,
-    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\nSuspending network equipment",
+    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\\nSuspending network equipment",
     "choices": [
       {
         "id_choice": 1,
@@ -686,7 +686,7 @@
   },
   "33": {
     "answer_type": 1,
-    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\nPooling physical equipment",
+    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\\nPooling physical equipment",
     "choices": [
       {
         "id_choice": 1,
@@ -707,7 +707,7 @@
   },
   "34": {
     "answer_type": 1,
-    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\nUninstalling unnecessary infrastructure",
+    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\\nUninstalling unnecessary infrastructure",
     "choices": [
       {
         "id_choice": 1,
@@ -728,7 +728,7 @@
   },
   "35": {
     "answer_type": 1,
-    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\nTraceability of material elements (CMDB)",
+    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\\nTraceability of material elements (CMDB)",
     "choices": [
       {
         "id_choice": 1,
@@ -749,7 +749,7 @@
   },
   "36": {
     "answer_type": 1,
-    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\nThe correct sizing of the servers in relation to their use",
+    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\\nThe correct sizing of the servers in relation to their use",
     "choices": [
       {
         "id_choice": 1,
@@ -770,7 +770,7 @@
   },
   "37": {
     "answer_type": 1,
-    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\nGive priority to ASHRAE 2 compatible equipment",
+    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\\nGive priority to ASHRAE 2 compatible equipment",
     "choices": [
       {
         "id_choice": 1,
@@ -791,7 +791,7 @@
   },
   "38": {
     "answer_type": 1,
-    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\nA procedure for provisioning and de-provisioning data-processing equipment in datacenters",
+    "question_name": "Have you led or are you planning actions to optimize your infrastructure? Especially :\\nA procedure for provisioning and de-provisioning data-processing equipment in datacenters",
     "choices": [
       {
         "id_choice": 1,
@@ -1028,28 +1028,28 @@
   },
   "51" : {
     "answer_type": 1,
-    "question_name" : "Do you have those equipments in your compagny:\nFixed stations, workstations",
+    "question_name" : "Do you have those equipments in your compagny:\\nFixed stations, workstations",
     "choices": [
       {
         "id_choice": 1,
-        "choice_text": "Used\nEquipment used in the business activity",
+        "choice_text": "Used\\nEquipment used in the business activity",
         "next_question_id": 52
       },
       {
         "id_choice": 2,
-        "choice_text": "Not used functional\nEquipment in working order but no more used by the company (stored)",
+        "choice_text": "Not used functional\\nEquipment in working order but no more used by the company (stored)",
         "next_question_id": 52
       },
       {
         "id_choice": 3,
-        "choice_text": "Neither used nor functional\nOut of service equipment (HS) waiting for end of life treatment",
+        "choice_text": "Neither used nor functional\\nOut of service equipment (HS) waiting for end of life treatment",
         "next_question_id": 52
       }
     ]
   },
   "53" : {
     "answer_type": 1,
-    "question_name" : "Do you have those equipments in your compagny:\n Small printers (<15kg, potentially used by a household)",
+    "question_name" : "Do you have those equipments in your compagny:\\n Small printers (<15kg, potentially used by a household)",
     "choices": [
       {
         "id_choice": 1,
@@ -1070,7 +1070,7 @@
   },
   "54" : {
     "answer_type": 1,
-    "question_name" : "Do you have those equipments in your compagny:\nFlat screen monitors",
+    "question_name" : "Do you have those equipments in your compagny:\\nFlat screen monitors",
     "choices": [
       {
         "id_choice": 1,
@@ -1091,7 +1091,7 @@
   },
   "55" : {
     "answer_type": 1,
-    "question_name" : "Do you have those equipments in your compagny:\nOther flat screens (TV, projection screen, digital board ...)",
+    "question_name" : "Do you have those equipments in your compagny:\\nOther flat screens (TV, projection screen, digital board ...)",
     "choices": [
       {
         "id_choice": 1,
@@ -1112,7 +1112,7 @@
   },
   "56" : {
     "answer_type": 1,
-    "question_name" : "Do you have those equipments in your compagny:\nCRT monitors (monitors or other)",
+    "question_name" : "Do you have those equipments in your compagny:\\nCRT monitors (monitors or other)",
     "choices": [
       {
         "id_choice": 1,
@@ -1133,7 +1133,7 @@
   },
   "57" : {
     "answer_type": 1,
-    "question_name" : "Do you have those equipments in your compagny:\nVideo projectors",
+    "question_name" : "Do you have those equipments in your compagny:\\nVideo projectors",
     "choices": [
       {
         "id_choice": 1,
@@ -1154,7 +1154,7 @@
   },
   "58" : {
     "answer_type": 1,
-    "question_name" : "Do you have those equipments in your compagny:\nMobile phones",
+    "question_name" : "Do you have those equipments in your compagny:\\nMobile phones",
     "choices": [
       {
         "id_choice": 1,
@@ -1175,7 +1175,7 @@
   },
   "59" : {
     "answer_type": 1,
-    "question_name" : "Do you have those equipments in your compagny:\nFixed telephones (standalone not connected to such a standard)",
+    "question_name" : "Do you have those equipments in your compagny:\\nFixed telephones (standalone not connected to such a standard)",
     "choices": [
       {
         "id_choice": 1,
@@ -1196,7 +1196,7 @@
   },
   "60" : {
     "answer_type": 1,
-    "question_name" : "Do you have those equipments in your compagny:\nDigital cameras",
+    "question_name" : "Do you have those equipments in your compagny:\\nDigital cameras",
     "choices": [
       {
         "id_choice": 1,
@@ -1217,7 +1217,7 @@
   },
   "61" : {
     "answer_type": 1,
-    "question_name" : "Do you have those equipments in your compagny:\nHard Disk Devices, Storage, Backup",
+    "question_name" : "Do you have those equipments in your compagny:\\nHard Disk Devices, Storage, Backup",
     "choices": [
       {
         "id_choice": 1,
@@ -1238,7 +1238,7 @@
   },
   "62" : {
     "answer_type": 1,
-    "question_name" : "Do you have other devices in your company?\nKeyboards, mouse, graphic tablets, scanners, microphones, speakers, office equipment ...",
+    "question_name" : "Do you have other devices in your company?\\nKeyboards, mouse, graphic tablets, scanners, microphones, speakers, office equipment ...",
     "choices": [
       {
         "id_choice": 1,
@@ -1254,7 +1254,7 @@
   },
   "64" : {
     "answer_type": 1,
-    "question_name" : "Regarding other devices, do you have in your company:\nKeyboards",
+    "question_name" : "Regarding other devices, do you have in your company:\\nKeyboards",
     "choices": [
       {
         "id_choice": 1,
@@ -1275,7 +1275,7 @@
   },
   "65" : {
     "answer_type": 1,
-    "question_name" : "Regarding other devices, do you have in your company:\nMouse",
+    "question_name" : "Regarding other devices, do you have in your company:\\nMouse",
     "choices": [
       {
         "id_choice": 1,
@@ -1296,7 +1296,7 @@
   },
   "66" : {
     "answer_type": 1,
-    "question_name" : "Regarding other devices, do you have in your company:\nGraphic tablets",
+    "question_name" : "Regarding other devices, do you have in your company:\\nGraphic tablets",
     "choices": [
       {
         "id_choice": 1,
@@ -1317,7 +1317,7 @@
   },
   "67" : {
     "answer_type": 1,
-    "question_name" : "Regarding other devices, do you have in your company:\nScanners",
+    "question_name" : "Regarding other devices, do you have in your company:\\nScanners",
     "choices": [
       {
         "id_choice": 1,
@@ -1338,7 +1338,7 @@
   },
   "68" : {
     "answer_type": 1,
-    "question_name" : "Regarding other devices, do you have in your company:\nSpeakers",
+    "question_name" : "Regarding other devices, do you have in your company:\\nSpeakers",
     "choices": [
       {
         "id_choice": 1,
@@ -1359,7 +1359,7 @@
   },
   "69" : {
     "answer_type": 1,
-    "question_name" : "Regarding other devices, do you have in your company:\nOffice automation",
+    "question_name" : "Regarding other devices, do you have in your company:\\nOffice automation",
     "choices": [
       {
         "id_choice": 1,
@@ -1385,7 +1385,7 @@
     "choices": [
       {
         "id_choice": 1,
-        "choice_text": "Yes\nPlease specify how much in kWh / year:",
+        "choice_text": "Yes\\nPlease specify how much in kWh / year:",
         "is_text_field": true
       },
       {
@@ -1423,7 +1423,7 @@
     "choices": [
       {
         "id_choice": 1,
-        "choice_text": "Yes\nPlease specify how much in %:",
+        "choice_text": "Yes\\nPlease specify how much in %:",
         "is_text_field": true
       },
       {
@@ -1541,7 +1541,7 @@
   },
   "79" : {
     "answer_type": 1,
-    "question_name" : "Are your printers set by default in eco mode?\nEnergy saving (Automatic standby)",
+    "question_name" : "Are your printers set by default in eco mode?\\nEnergy saving (Automatic standby)",
     "choices": [
       {
         "id_choice": 1,
@@ -1562,7 +1562,7 @@
   },
   "80" : {
     "answer_type": 1,
-    "question_name" : "Are your printers set by default in eco mode?\nBlack and white by default",
+    "question_name" : "Are your printers set by default in eco mode?\\nBlack and white by default",
     "choices": [
       {
         "id_choice": 1,
@@ -1583,7 +1583,7 @@
   },
   "81" : {
     "answer_type": 1,
-    "question_name" : "Are your printers set by default in eco mode?\nDefault duplex",
+    "question_name" : "Are your printers set by default in eco mode?\\nDefault duplex",
     "choices": [
       {
         "id_choice": 1,
@@ -1604,7 +1604,7 @@
   },
   "82" : {
     "answer_type": 1,
-    "question_name" : "Are your printers set by default in eco mode?\nDefault draft mode",
+    "question_name" : "Are your printers set by default in eco mode?\\nDefault draft mode",
     "choices": [
       {
         "id_choice": 1,
