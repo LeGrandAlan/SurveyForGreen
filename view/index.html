@@ -19,9 +19,7 @@
 
             white-space: pre-line;
 
-            margin-right: auto;
-            margin-left: auto;
-            margin-top: 80px;
+            margin: 80px auto;
             padding: 20px;
 
             width: 100%;
@@ -29,6 +27,12 @@
             min-width: 400px;
 
             background-color: #FFF;
+            box-shadow: rgba(0,0,0,0.5) 2px 2px 6px;
+        }
+        span.arrow {
+            font-weight: bold;
+            font-size: 40px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -37,6 +41,43 @@
         INTRODUCTION TO THE QUESTIONNAIRE :
         With the support of ADEME, the Ministry of Ecology, Energy and the Sea and the Ministry of Economy and Finance, the association AGIT (Alliance for Green IT) and the eco-organizations of the recycling network of Waste Electrical and Electronic Equipment (WEEE) organize a survey to assess the deposits of computer and office equipment present in companies and more generally on the maturity of companies in France in the use of eco-responsible digital services. The duration of the questionnaire is estimated at 15 minutes if you are able to answer questions directly. You can return at any time on the questionnaire, answer in several times, your previous answers are recorded. In case of modification, only the last answer will be taken into account. You can submit this questionnaire to several people in your organization. All you have to do is simply share the link to the questionnaire. Thank you for participating in this survey. Your answer is invaluable to us to constitute the most representative sample of the compnies in France.
 
+        1. Type Single Choice
+
+        <input type="radio" name="id-question">Réponse 1
+        <input type="radio" name="id-question">Réponse 2
+        <input type="radio" name="id-question">Réponse 3
+        <input type="radio" name="id-question">Réponse 4
+        <input type="radio" name="id-question">Réponse 5
+        <input type="radio" name="id-question">Réponse 6
+        <input type="radio" name="id-question">Réponse 7
+        <input type="radio" name="id-question">Réponse 8
+        <input type="radio" name="id-question">Réponse 9
+
+        2. Type Text
+
+        <input type="text" name="id-question">
+
+        3. Type Single Choice or text field
+
+        <input type="radio" name="id-question">Réponse 1
+        <input type="radio" name="id-question">Réponse 2
+        <input type="text" name="id-question">
+
+        4. Type Multiple choice
+
+        <input type="checkbox" name="id-question" value="test">Réponse 1
+        <input type="checkbox" name="id-question" value="test">Réponse 2
+        <input type="checkbox" name="id-question" value="test">Réponse 3
+        <input type="checkbox" name="id-question" value="test">Réponse 4
+        <span class="arrow" onclick="loadprevious()">&#8249;</span><span class="arrow">&#8250;</span>
     </pre>
+<script>
+    function loadNext() {
+        console.log("next")
+    }
+    function loadprevious() {
+        console.log("prev")
+    }
+</script>
 </body>
 </html>
