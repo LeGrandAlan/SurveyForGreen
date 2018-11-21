@@ -4,6 +4,7 @@ const url = require("url");
 const http = require('http');
 const querystring = require('querystring');
 const fs = require("fs");
+var zlib = require('zlib');
 
 // On créer notre serveur
 let server = http.createServer(function (req, res) { // On reçoit la demande de connexion du client
@@ -18,7 +19,8 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
 
         // // ------------------ Création d'une page avec des infos contenu dans l'URL -----------------------------
         let params = querystring.parse(url.parse(req.url).query); // On récupère les paramètres dans l'url puis les valeurs
-        res.writeHead(200, {"Content-Type": "text/html"});
+        // res.writeHead(200, {"Content-Type": "text/html"});
+        res.writeHead(200, {'Content-Type': 'text/html', 'Content-Encoding': 'gzip'});
         if ('token' in params) { // Si il y a un nom et un prnom dans l'url
             res.write('Vous avez le token ' + params['token']);
             try {
@@ -37,8 +39,11 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
                 res.write('Erreur 404 : Page introuvable');
                 res.end(); // On termine notre communication avec le serveur
             } else {
-                res.write(data);
-                res.end(); // On termine notre communication avec le serveur
+                zlib.gzip(data, function (_, result) {  // The callback will give you the
+                    res.end(result);                     // result, so just send it.
+                });
+                // res.write(data);
+                // res.end(); // On termine notre communication avec le serveur
             }
         });
 
