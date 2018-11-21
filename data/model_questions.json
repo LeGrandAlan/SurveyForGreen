@@ -1,0 +1,51 @@
+// 1: Single Choice
+// 2: Text
+// 3: Single choice + texte
+// 4: multiple choice
+
+{
+  "num-question": {
+    "answer_type": 1,
+    "question_name" : "In which sector of activity is your company active? (linked with your APE code)",
+    "choices": [
+      {
+        "id_choice": 1,
+        "choice_text": "test",
+        "next_question_id": 2
+      },..
+    ]
+  },
+  "2": {
+    "answer_type": 2,
+    "next_question_id": 3,
+    "question_name" : "In which sector of activity is your company active? (linked with your APE code)"
+  },
+  "3": {
+    "answer_type": 3,
+    "next_question_id": 4,
+    "question_name" : "In which sector of activity is your company active? (linked with your APE code)",
+    "choices": [
+      {
+        "id_choice": 1,
+        "choice_text": "test",
+        "is_text_field": true  // c'est un type texte
+      },
+      {
+        "id_choice": 2,
+        "choice_text": "test",
+        "is_text_field": false // c'est un type radio
+      }
+    ]
+  },
+  "4": {
+    "answer_type": 2,
+    "next_question_id": null, // dernière question
+    "question_name" : "In which sector of activity is your company active? (linked with your APE code)",
+    "choices": [
+      {
+        "id_choice": 1,
+        "choice_text": "test"
+      },..
+    ]
+  }
+}
