@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,12 +10,13 @@
 
             background-color: #FFEAA7;
         }
+
         pre#main {
             /* Retour automatique à la ligne */
-            white-space: pre-wrap;       /* Since CSS 2.1 */
-            white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-            white-space: -o-pre-wrap;    /* Opera 7 */
-            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            white-space: pre-wrap; /* Since CSS 2.1 */
+            white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+            white-space: -o-pre-wrap; /* Opera 7 */
+            word-wrap: break-word; /* Internet Explorer 5.5+ */
 
             white-space: pre-line;
 
@@ -27,8 +28,9 @@
             min-width: 400px;
 
             background-color: #FFF;
-            box-shadow: rgba(0,0,0,0.5) 2px 2px 6px;
+            box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 6px;
         }
+
         span.arrow {
             font-weight: bold;
             font-size: 40px;
@@ -36,10 +38,9 @@
         }
     </style>
 </head>
-<body id="body">
-    <pre id="main">
-        INTRODUCTION TO THE QUESTIONNAIRE :
-        With the support of ADEME, the Ministry of Ecology, Energy and the Sea and the Ministry of Economy and Finance, the association AGIT (Alliance for Green IT) and the eco-organizations of the recycling network of Waste Electrical and Electronic Equipment (WEEE) organize a survey to assess the deposits of computer and office equipment present in companies and more generally on the maturity of companies in France in the use of eco-responsible digital services. The duration of the questionnaire is estimated at 15 minutes if you are able to answer questions directly. You can return at any time on the questionnaire, answer in several times, your previous answers are recorded. In case of modification, only the last answer will be taken into account. You can submit this questionnaire to several people in your organization. All you have to do is simply share the link to the questionnaire. Thank you for participating in this survey. Your answer is invaluable to us to constitute the most representative sample of the compnies in France.
+<body id="body" onload="intro();">
+<pre id="main">
+        <!--INTRODUCTION TO THE QUESTIONNAIRE :
 
         1. Type Single Choice
 
@@ -68,15 +69,207 @@
         <input type="checkbox" name="id-question" value="test">Réponse 1
         <input type="checkbox" name="id-question" value="test">Réponse 2
         <input type="checkbox" name="id-question" value="test">Réponse 3
-        <input type="checkbox" name="id-question" value="test">Réponse 4
-        <span class="arrow" onclick="loadprevious()">&#8249;</span><span class="arrow">&#8250;</span>
+        <input type="checkbox" name="id-question" value="test">Réponse 4-->
     </pre>
 <script>
-    function loadNext() {
-        console.log("next")
+    'use strict';
+    let json = "{\n" +
+        "  \"1\": {\n" +
+        "    \"answer_type\": 1,\n" +
+        "    \"question_name\": \"In which sector of activity is your company active? (linked with your APE code)\",\n" +
+        "    \"choices\": [\n" +
+        "      {\n" +
+        "        \"id_choice\": 1,\n" +
+        "        \"choice_text\": \"Industry\",\n" +
+        "        \"next_question_id\": 2\n" +
+        "      },\n" +
+        "      {\n" +
+        "        \"id_choice\": 2,\n" +
+        "        \"choice_text\": \"Business\",\n" +
+        "        \"next_question_id\": 2\n" +
+        "      },\n" +
+        "      {\n" +
+        "        \"id_choice\": 3,\n" +
+        "        \"choice_text\": \"Information and communication\",\n" +
+        "        \"next_question_id\": 2\n" +
+        "      },\n" +
+        "      {\n" +
+        "        \"id_choice\": 4,\n" +
+        "        \"choice_text\": \"Other services activity\",\n" +
+        "        \"next_question_id\": 2\n" +
+        "      },\n" +
+        "      {\n" +
+        "        \"id_choice\": 5,\n" +
+        "        \"choice_text\": \"All other activities (financial, agricultural activities ...)\",\n" +
+        "        \"next_question_id\": 2\n" +
+        "      },\n" +
+        "      {\n" +
+        "        \"id_choice\": 6,\n" +
+        "        \"choice_text\": \"Construction\",\n" +
+        "        \"next_question_id\": 2\n" +
+        "      },\n" +
+        "      {\n" +
+        "        \"id_choice\": 7,\n" +
+        "        \"choice_text\": \"Public sector\",\n" +
+        "        \"next_question_id\": 2\n" +
+        "      },\n" +
+        "      {\n" +
+        "        \"id_choice\": 8,\n" +
+        "        \"choice_text\": \"Specialized, Scientific and Technical or Administrative and Support Services Activities\",\n" +
+        "        \"next_question_id\": 2\n" +
+        "      },\n" +
+        "      {\n" +
+        "        \"id_choice\": 9,\n" +
+        "        \"choice_text\": \"Real estate\",\n" +
+        "        \"next_question_id\": 2\n" +
+        "      }\n" +
+        "    ]\n" +
+        "  },\n" +
+        "  \"2\": {\n" +
+        "    \"answer_type\": 1,\n" +
+        "    \"question_name\": \"What is the number of employees in your company on 18/12/31 ?\",\n" +
+        "    \"choices\": [\n" +
+        "      {\n" +
+        "        \"id_choice\": 1,\n" +
+        "        \"choice_text\": \"0\",\n" +
+        "        \"next_question_id\": 3\n" +
+        "      },\n" +
+        "      {\n" +
+        "        \"id_choice\": 2,\n" +
+        "        \"choice_text\": \"1 to 2\",\n" +
+        "        \"next_question_id\": 3\n" +
+        "      },\n" +
+        "      {\n" +
+        "        \"id_choice\": 3,\n" +
+        "        \"choice_text\": \"3 to 9\",\n" +
+        "        \"next_question_id\": 3\n" +
+        "      },\n" +
+        "      {\n" +
+        "        \"id_choice\": 4,\n" +
+        "        \"choice_text\": \"10 to 49\",\n" +
+        "        \"next_question_id\": 3\n" +
+        "      },\n" +
+        "      {\n" +
+        "        \"id_choice\": 5,\n" +
+        "        \"choice_text\": \"50 to 249\",\n" +
+        "        \"next_question_id\": 3\n" +
+        "      },\n" +
+        "      {\n" +
+        "        \"id_choice\": 6,\n" +
+        "        \"choice_text\": \"250 to 4999\",\n" +
+        "        \"next_question_id\": 3\n" +
+        "      },\n" +
+        "      {\n" +
+        "        \"id_choice\": 7,\n" +
+        "        \"choice_text\": \"More than 5000\",\n" +
+        "        \"next_question_id\": 3\n" +
+        "      }\n" +
+        "\n" +
+        "    ]\n" +
+        "  },\n" +
+        "  \"3\": {\n" +
+        "    \"answer_type\": 1,\n" +
+        "    \"question_name\": \"What is the turnover of your company in the last fiscal year? (or annual budget for Public sector)\",\n" +
+        "    \"choices\": [\n" +
+        "      {\n" +
+        "        \"id_choice\": 1,\n" +
+        "        \"choice_text\": \"0 to 100K €\",\n" +
+        "        \"next_question_id\": 4\n" +
+        "      },\n" +
+        "      {\n" +
+        "        \"id_choice\": 2,\n" +
+        "        \"choice_text\": \"100K to 500K €\",\n" +
+        "        \"next_question_id\": 4\n" +
+        "      },\n" +
+        "      {\n" +
+        "        \"id_choice\": 3,\n" +
+        "        \"choice_text\": \"500K to 2M €\",\n" +
+        "        \"next_question_id\": 4\n" +
+        "      },\n" +
+        "      {\n" +
+        "        \"id_choice\": 4,\n" +
+        "        \"choice_text\": \"2M to 10M€\",\n" +
+        "        \"next_question_id\": 4\n" +
+        "      },\n" +
+        "      {\n" +
+        "        \"id_choice\": 5,\n" +
+        "        \"choice_text\": \"10M to 50M €\",\n" +
+        "        \"next_question_id\": 4\n" +
+        "      },\n" +
+        "      {\n" +
+        "        \"id_choice\": 6,\n" +
+        "        \"choice_text\": \"More than 50M €\",\n" +
+        "        \"next_question_id\": 4\n" +
+        "      }\n" +
+        "\n" +
+        "    ]\n" +
+        "  }\n" +
+        "}\n";
+    json = JSON.parse(json);
+
+    let buttons = "\n<span class=\"arrow\" onclick=\"loadPrevious();\">&#8249;</span><span class=\"arrow\" onclick=\"loadNext();\">&#8250;</span>";
+    let actualQuestionNumber = 0;
+
+    function intro() {
+        let div = document.getElementById('main');
+        //TODO: compresser le texte
+        div.innerHTML = "With the support of ADEME, the Ministry of Ecology, Energy and the Sea and the Ministry of Economy and Finance, the association AGIT (Alliance for Green IT) and the eco-organizations of the recycling network of Waste Electrical and Electronic Equipment (WEEE) organize a survey to assess the deposits of computer and office equipment present in companies and more generally on the maturity of companies in France in the use of eco-responsible digital services. The duration of the questionnaire is estimated at 15 minutes if you are able to answer questions directly. You can return at any time on the questionnaire, answer in several times, your previous answers are recorded. In case of modification, only the last answer will be taken into account. You can submit this questionnaire to several people in your organization. All you have to do is simply share the link to the questionnaire. Thank you for participating in this survey. Your answer is invaluable to us to constitute the most representative sample of the compnies in France.";
+        div.innerHTML += buttons;
     }
-    function loadprevious() {
-        console.log("prev")
+
+    function load(){
+        console.log("load");
+        let div = document.getElementById('main');
+        let questionType = json[actualQuestionNumber]['answer_type'];
+        //TODO: voir la taille max
+        div.innerHTML = json[actualQuestionNumber]['question_name'];
+
+        if (questionType === 1) {
+            let choices = json[actualQuestionNumber]['choices'];
+            choices.forEach((line) => {
+                    //let choiceId = line['id_choice'];
+                    let choiceText = line['choice_text'];
+                    div.innerHTML += "\n<input type=\"radio\" name=\""+ actualQuestionNumber +"\">" + choiceText;
+                }
+            );
+        } else if (questionType === 2){
+            div.innerHTML += "<input type=\"text\" name=\""+ actualQuestionNumber +"\">";
+        } else if (questionType === 3) {
+
+        } else if (questionType === 4) {
+            let choices = json[actualQuestionNumber]['choices'];
+            choices.forEach((line) => {
+                    //let choiceId = line['id_choice'];
+                    let choiceText = line['choice_text'];
+                    div.innerText += "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\">" + choiceText;
+                }
+            );
+        } else if (questionType === 5) {
+
+        } else if (questionType === 6) {
+
+        }
+
+        div.innerHTML += buttons;
+    }
+
+    function loadNext() {
+        actualQuestionNumber++;
+        load();
+    }
+
+    function loadPrevious() {
+        console.log(actualQuestionNumber);
+        actualQuestionNumber--;
+        if (actualQuestionNumber < 0) {
+            actualQuestionNumber = 0;
+        }
+        console.log(actualQuestionNumber);
+        if(actualQuestionNumber === 0){
+            intro();
+        } else {
+            load();
+        }
     }
 </script>
 </body>
