@@ -33,12 +33,13 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
         }
 
         // ------------------ Envoit d'un code html -----------------------------
-        fs.readFile('./view/index.html', null, (err, data) => {
+        fs.readFile('./view/index2.html', null, (err, data) => {
             if(err){
                 res.writeHead(404, {"Content-Type": "text/plain"});
                 res.write('Erreur 404 : Page introuvable');
                 res.end(); // On termine notre communication avec le serveur
             } else {
+                console.log(data);
                 zlib.gzip(data, function (_, result) {  // The callback will give you the
                     res.end(result);                     // result, so just send it.
                 });
