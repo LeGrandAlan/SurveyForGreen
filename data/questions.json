@@ -1,0 +1,132 @@
+{
+  "1": {
+    "answer_type": 1,
+    "question_name": "In which sector of activity is your company active? (linked with your APE code)",
+    "choices": [
+      {
+        "id_choice": 1,
+        "choice_text": "Industry",
+        "next_question_id": 2
+      },
+      {
+        "id_choice": 2,
+        "choice_text": "Business",
+        "next_question_id": 2
+      },
+      {
+        "id_choice": 3,
+        "choice_text": "Information and communication",
+        "next_question_id": 2
+      },
+      {
+        "id_choice": 4,
+        "choice_text": "Other services activity",
+        "next_question_id": 2
+      },
+      {
+        "id_choice": 5,
+        "choice_text": "All other activities (financial, agricultural activities ...)",
+        "next_question_id": 2
+      },
+      {
+        "id_choice": 6,
+        "choice_text": "Construction",
+        "next_question_id": 2
+      },
+      {
+        "id_choice": 7,
+        "choice_text": "Public sector",
+        "next_question_id": 2
+      },
+      {
+        "id_choice": 8,
+        "choice_text": "Specialized, Scientific and Technical or Administrative and Support Services Activities",
+        "next_question_id": 2
+      },
+      {
+        "id_choice": 9,
+        "choice_text": "Real estate",
+        "next_question_id": 2
+      }
+    ]
+  },
+  "2": {
+    "answer_type": 1,
+    "question_name": "What is the number of employees in your company on 18/12/31 ?",
+    "choices": [
+      {
+        "id_choice": 1,
+        "choice_text": "0",
+        "next_question_id": 3
+      },
+      {
+        "id_choice": 2,
+        "choice_text": "1 to 2",
+        "next_question_id": 3
+      },
+      {
+        "id_choice": 3,
+        "choice_text": "3 to 9",
+        "next_question_id": 3
+      },
+      {
+        "id_choice": 4,
+        "choice_text": "10 to 49",
+        "next_question_id": 3
+      },
+      {
+        "id_choice": 5,
+        "choice_text": "50 to 249",
+        "next_question_id": 3
+      },
+      {
+        "id_choice": 6,
+        "choice_text": "250 to 4999",
+        "next_question_id": 3
+      },
+      {
+        "id_choice": 7,
+        "choice_text": "More than 5000",
+        "next_question_id": 3
+      }
+
+    ]
+  },
+  "3": {
+    "answer_type": 1,
+    "question_name": "What is the turnover of your company in the last fiscal year? (or annual budget for Public sector)",
+    "choices": [
+      {
+        "id_choice": 1,
+        "choice_text": "0 to 100K €",
+        "next_question_id": 4
+      },
+      {
+        "id_choice": 2,
+        "choice_text": "100K to 500K €",
+        "next_question_id": 4
+      },
+      {
+        "id_choice": 3,
+        "choice_text": "500K to 2M €",
+        "next_question_id": 4
+      },
+      {
+        "id_choice": 4,
+        "choice_text": "2M to 10M€",
+        "next_question_id": 4
+      },
+      {
+        "id_choice": 5,
+        "choice_text": "10M to 50M €",
+        "next_question_id": 4
+      },
+      {
+        "id_choice": 6,
+        "choice_text": "More than 50M €",
+        "next_question_id": 4
+      }
+
+    ]
+  }
+}
