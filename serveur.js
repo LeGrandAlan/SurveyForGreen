@@ -33,7 +33,7 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
         }
 
         // ------------------ Envoit d'un code html -----------------------------
-        fs.readFile('./view/index2.html', null, (err, data) => {
+        fs.readFile('./view/index.html', null, (err, data) => {
             if(err){
                 res.writeHead(404, {"Content-Type": "text/plain"});
                 res.write('Erreur 404 : Page introuvable');
