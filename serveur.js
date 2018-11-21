@@ -40,7 +40,7 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
                 } else {
                     let html = data2;
                     fs.readFile('./data/questions.json', null, (err, data) => {
-                        let toEncode = "\n<script>var json = \`" + data + "\`;\n";
+                        let toEncode = "\n<script>var json = \`" + data + "\`;</script>\n";
                         html += toEncode;
                         fs.readFile('./view/index.html', null, (err, data3) => {
                             html += data3;
