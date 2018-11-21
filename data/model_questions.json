@@ -2,7 +2,8 @@
 // 2: Text
 // 3: Single choice + texte
 // 4: multiple choice
-
+// 5: Plusieurs champs text
+// 6: multiple choice + text
 {
   "num-question": {
     "answer_type": 1,
@@ -38,7 +39,7 @@
     ]
   },
   "4": {
-    "answer_type": 2,
+    "answer_type": 4,
     "next_question_id": null, // dernière question
     "question_name" : "In which sector of activity is your company active? (linked with your APE code)",
     "choices": [
@@ -46,6 +47,35 @@
         "id_choice": 1,
         "choice_text": "test"
       },..
+    ]
+  },
+  "5": {
+    "answer_type": 5,
+    "next_question_id": null, // dernière question
+    "question_name" : "In which sector of activity is your company active? (linked with your APE code)",
+    "choices": [
+      {
+        "id_choice": 1,
+        "choice_text": "test"
+      },..
+    ]
+  },
+
+  "6": {
+    "answer_type": 6,
+    "next_question_id": 4,
+    "question_name" : "anyway",
+    "choices": [
+      {
+        "id_choice": 1,
+        "choice_text": "test",
+        "is_text_field": true  // c'est un type texte
+      },
+      {
+        "id_choice": 2,
+        "choice_text": "test",
+        "is_text_field": false // c'est un type radio
+      }
     ]
   }
 }
