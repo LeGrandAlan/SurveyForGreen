@@ -5,7 +5,7 @@
     <style>
         body#body {
             margin: 0;
-            padding: 0;
+            padding: 0 40px 0 40px;
 
             background-color: #c6dabf;
         }
@@ -30,10 +30,12 @@
             min-width: 400px;
 
             font-family: 'Arimo', sans-serif;
+            font-weight: 600;
             color: #ffffff;
             background: #88d498;
             box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 6px;
             border-radius: 6px;
+            position: relative;
         }
 
         span.arrow {
@@ -48,6 +50,41 @@
             box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 6px;
 
         }
+        button.tel {
+            font-weight: bold;
+            font-size: 20px;
+            cursor: pointer;
+            color: #ffffff;
+            background: #43a689;
+            opacity: 1;
+            pointer-events: auto;
+            border-radius: 6px;
+            position: absolute;
+            left: 0px;
+            margin-left: 20%;
+            margin-top: 15px;
+            box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 6px;
+            border: none;
+            padding: 3px;
+        }
+
+        button.sauv {
+            font-weight: bold;
+            font-size: 20px;
+            cursor: pointer;
+            color: #ffffff;
+            background: #43a689;
+            opacity: 1;
+            pointer-events: auto;
+            border-radius: 6px;
+            position: absolute;
+            right: 0;
+            margin-right: 20%;
+            margin-top: 15px;
+            box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 6px;
+            border: none;
+            padding: 3px;
+        }
 
         span.arrow:hover {
             background: #678c99;
@@ -55,35 +92,4 @@
     </style>
 </head>
 <body id="body" onload="intro();">
-<pre id="main">
-        <!--INTRODUCTION TO THE QUESTIONNAIRE :
-
-        1. Type Single Choice
-
-        <input type="radio" name="id-question">Réponse 1
-        <input type="radio" name="id-question">Réponse 2
-        <input type="radio" name="id-question">Réponse 3
-        <input type="radio" name="id-question">Réponse 4
-        <input type="radio" name="id-question">Réponse 5
-        <input type="radio" name="id-question">Réponse 6
-        <input type="radio" name="id-question">Réponse 7
-        <input type="radio" name="id-question">Réponse 8
-        <input type="radio" name="id-question">Réponse 9
-
-        2. Type Text
-
-        <input type="text" name="id-question">
-
-        3. Type Single Choice or text field
-
-        <input type="radio" name="id-question">Réponse 1
-        <input type="radio" name="id-question">Réponse 2
-        <input type="text" name="id-question">
-
-        4. Type Multiple choice
-
-        <input type="checkbox" name="id-question" value="test">Réponse 1
-        <input type="checkbox" name="id-question" value="test">Réponse 2
-        <input type="checkbox" name="id-question" value="test">Réponse 3
-        <input type="checkbox" name="id-question" value="test">Réponse 4-->
-    </pre>
+<pre id="main"></pre>
