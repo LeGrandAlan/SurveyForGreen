@@ -32,6 +32,11 @@
         div.innerHTML += buttons +=buttonsSave ;
     }
 
+    function conclusion() {
+        let div = document.getElementById('main');
+        div.innerHTML = "Merci de votre paricipation";
+    }
+
     function load(){
         let div = document.getElementById('main');
         let questionType = json[actualQuestionNumber]['a'];
@@ -99,28 +104,32 @@
                 }
             );
         }
-
         div.innerHTML += buttons;
     }
 
     function loadNext() {
-        // si on était à l'intro
-        if(actualQuestionNumber === 0) {
+        if (actualQuestionNumber === 0) {
             actualQuestionNumber = 1;
         } else {
             //récupération de la réponse
             let div = document.getElementById('main');
             let questions = document.getElementsByName(actualQuestionNumber);
             let value;
+            let findChecked;
             switch (div.getAttribute('questiontype')) {
                 case "1":
-                    questions.forEach((line) => {
+                    for(let line of questions) {
+                    //questions.forEach((line) => {
                         if(line.checked) {
                             value = line.getAttribute('value');
                             let questionId = line.getAttribute('name');
                             actualQuestionNumber = parseInt(line.getAttribute('next'));
+                            if(isNaN(actualQuestionNumber)){
+                                conclusion();
+                                break;
+                            }
                         }
-                    });
+                    }//);
                     break;
                 case "2":
                     value = questions[0].value;
@@ -129,8 +138,8 @@
                     }
                     break;
                 case "3":
-                    //TODO: il faut regarder pour les IDs si un type radio a un type texte
-                    let findChecked = false;
+                    findChecked = false;
+                    let questionNumber = actualQuestionNumber;
                     questions.forEach((line) => {
                         if(line.getAttribute('type') === "radio"){
                             if(line.checked) {
@@ -143,7 +152,7 @@
                             if(line.getAttribute('id') === value){
                                 value = line.value;
                                 if(value === ""){
-                                    actualQuestionNumber--;
+                                    actualQuestionNumber = questionNumber;
                                 }
                             }
                         }
@@ -161,11 +170,54 @@
                     });
                     break;
                 case "6":
-
+                    let tab = [];
+                    let beforeQuestion = actualQuestionNumber;
+                    findChecked = false;
+                    let i = 0;
+                    for(let line of questions) {
+                        if(tab.includes("tableau incorrect")){
+                            tab = [];
+                            break;
+                        }
+                        if(line.getAttribute('type') === "checkbox"){
+                            if(line.checked) {
+                                value = line.getAttribute('id');
+                                let value_text = line.getAttribute('value');
+                                findChecked = true;
+                                actualQuestionNumber = parseInt(line.getAttribute('next'));
+                                if(value === "") {
+                                    tab.push("");
+                                } else {
+                                    tab.push(value_text);
+                                }
+                            } else {
+                                tab.push("");
+                            }
+                        } else if(findChecked && line.getAttribute('type') === "text"){
+                            // le texte correspond à la case cochée
+                            if(line.getAttribute('id') === value){
+                                value = line.value;
+                                if(value === ""){
+                                    actualQuestionNumber = beforeQuestion;
+                                    tab.push("tableau incorrect");//TODO: voir si meilleure solution
+                                } else {
+                                    tab.splice(-1,1);
+                                    tab.push(value);
+                                }
+                                findChecked = false;
+                            }
+                        }
+                        i++;
+                    }
+                    if(tab.length < i){
+                        tab.push("");
+                    }
                     break;
             }
         }
-        load();
+        if(!isNaN(actualQuestionNumber)) {
+            load();
+        }
     }
 
     function loadPrevious() {
