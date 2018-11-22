@@ -67,14 +67,14 @@
                     div.innerHTML += "\n"+ choiceText +"<input type=\"text\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\" next=\""+ nextQuestion +"\">";
                 }
             );
-        } else if (questionType === 6) { //TODO: débuger car affichage en texte q88
+        } else if (questionType === 6) { //TODO: débuger car affichage en texte q87
             let c = json[actualQuestionNumber]['c'];
             c.forEach((line) => {
                     let choiceId = line['i'];
                     let choiceText = line['t'];
                     if(line['f']){
                         div.innerText += "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\" id=\""+ choiceId +"\" next=\""+ nextQuestion +"\">";
-                        div.innerHTML += choiceText +"<input type=\"text\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\">";
+                        div.innerHTML += choiceText +" <input type=\"text\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\">";
                     } else {
                         div.innerText +=
                             "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\" id=\""+ choiceId +"\" next=\""+ nextQuestion +"\">" + choiceText;
@@ -101,7 +101,7 @@
                         if(line.checked) {
                             value = line.getAttribute('value');
                             let questionId = line.getAttribute('name');
-                            actualQuestionNumber = line.getAttribute('next');
+                            actualQuestionNumber = parseInt(line.getAttribute('next')); //TODO: mettre cast partout
                         }
                     });
                     break;
@@ -132,15 +132,19 @@
                         }
                     });
                     break;
-                case "4":
+                case "5":
                     let values = [];
                     questions.forEach((line) => {
-                        if(line.checked) {
-                            value = line.getAttribute('value');
-                            let questionId = line.getAttribute('name');
-                            actualQuestionNumber = line.getAttribute('next');
+                        if(line.value !== ""){
+                            values.push(line.value);
+                        } else {
+                            values.push("");
                         }
+                        actualQuestionNumber = line.getAttribute('next');
                     });
+                    break;
+                case "6":
+
                     break;
             }
         }
