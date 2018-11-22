@@ -29,9 +29,20 @@
                 }
             );
         } else if (questionType === 2){
-            div.innerHTML += "<input type=\"text\" name=\""+ actualQuestionNumber +"\">";
+            div.innerHTML += "\n<input type=\"text\" name=\""+ actualQuestionNumber +"\">";
         } else if (questionType === 3) {
-
+            let choices = json[actualQuestionNumber]['choices'];
+            choices.forEach((line) => {
+                    //let choiceId = line['id_choice'];
+                    let choiceText = line['choice_text'];
+                    if(line['is_text_field']){
+                        div.innerHTML += "\n<input type=\"radio\" name=\""+ actualQuestionNumber +"\">" ;
+                        div.innerHTML += choiceText +"<input type=\"text\" name=\""+ actualQuestionNumber +"\">";
+                    } else {
+                        div.innerHTML += "\n<input type=\"radio\" name=\""+ actualQuestionNumber +"\">" + choiceText;
+                    }
+                }
+            );
         } else if (questionType === 4) {
             let choices = json[actualQuestionNumber]['choices'];
             choices.forEach((line) => {
@@ -41,9 +52,26 @@
                 }
             );
         } else if (questionType === 5) {
-
+            let choices = json[actualQuestionNumber]['choices'];
+            choices.forEach((line) => {
+                    //let choiceId = line['id_choice'];
+                    let choiceText = line['choice_text'];
+                    div.innerHTML += "\n"+ choiceText +"<input type=\"text\" name=\""+ actualQuestionNumber +"\">";
+                }
+            );
         } else if (questionType === 6) {
-
+            let choices = json[actualQuestionNumber]['choices'];
+            choices.forEach((line) => {
+                    //let choiceId = line['id_choice'];
+                    let choiceText = line['choice_text'];
+                    if(line['is_text_field']){
+                        div.innerText += "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\">";
+                        div.innerHTML += choiceText +"<input type=\"text\" name=\""+ actualQuestionNumber +"\">";
+                    } else {
+                        div.innerText += "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\">" + choiceText;
+                    }
+                }
+            );
         }
 
         div.innerHTML += buttons;
@@ -60,7 +88,6 @@
         if (actualQuestionNumber < 0) {
             actualQuestionNumber = 0;
         }
-        console.log(actualQuestionNumber);
         if(actualQuestionNumber === 0){
             intro();
         } else {
