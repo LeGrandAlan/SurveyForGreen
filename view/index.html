@@ -5,9 +5,8 @@
 
     console.log("Token :" + token);
 
-    let buttons = "\n\n\n<span class=\"arrow\" onclick=\"loadPrevious();\">&#xA0;&#8249;&#xA0;</span><span style='float: right' class=\"arrow\" onclick=\"loadNext();\">&#xA0;&#8250;&#xA0;</span>";
+    let buttons = "\n\n\n<span class=\"arrow\" onclick=\"loadPrevious();\">&#xA0;&#8249;&#xA0;</span><span class='arrow' onclick='save();'>Sauvegarder</span><span class='arrow' onclick='downloadCSV();'>Télécharger</span><span style='float: right' class=\"arrow\" onclick=\"loadNext();\">&#xA0;&#8250;&#xA0;</span>";
     let actualQuestionNumber = 0;
-    let buttonsSave = "\n <button onclick=\"save();\" type=\"button\">Sauvegarder</button>";
 
     function save() {
         if (jsonrep == null) {
@@ -24,11 +23,16 @@
         }
     }
 
+    function downloadCSV() {
+
+
+    }
+
     function intro() {
         let div = document.getElementById("main");
         //TODO: compresser le texte
         div.innerHTML = "With the support of ADEME, the Ministry of Ecology, Energy and the Sea and the Ministry of Economy and Finance, the association AGIT (Alliance for Green IT) and the eco-organizations of the recycling network of Waste Electrical and Electronic Equipment (WEEE) organize a survey to assess the deposits of computer and office equipment present in companies and more generally on the maturity of companies in France in the use of eco-responsible digital services. The duration of the questionnaire is estimated at 15 minutes if you are able to answer questions directly. You can return at any time on the questionnaire, answer in several times, your previous answers are recorded. In case of modification, only the last answer will be taken into account. You can submit this questionnaire to several people in your organization. All you have to do is simply share the link to the questionnaire. Thank you for participating in this survey. Your answer is invaluable to us to constitute the most representative sample of the companies in France.";
-        div.innerHTML += buttons += buttonsSave;
+        div.innerHTML += buttons;
         jsonrep = "{\"token\":{\"i\":\""+ token +"\"},";
     }
 
