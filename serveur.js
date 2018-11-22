@@ -34,12 +34,13 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
 
         // ------------------ Envoit d'un code html -----------------------------
 
+
         fs.readFile('./view/index_head.html', null, (err, data2) => {
                 if (err) {
                     console.log(err);
                 } else {
                     let html = data2;
-                    fs.readFile('./data/questions.json', null, (err, data) => {
+                    fs.readFile('./data/questionsv2_min.json', null, (err, data) => {
                         let toEncode = "\n<script>var json = \`" + data + "\`;</script>\n";
                         html += toEncode;
                         fs.readFile('./view/index.html', null, (err, data3) => {
@@ -53,8 +54,6 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
                 }
             }
         );
-
-
     } else {
         res.writeHead(404, {"Content-Type": "text/plain"});
         res.write('Erreur 404 : Page introuvable');
