@@ -16,7 +16,6 @@
     }
 
     function load(){
-        console.log("load");
         let div = document.getElementById('main');
         let questionType = json[actualQuestionNumber]['a'];
         //TODO: voir la taille max
@@ -25,9 +24,10 @@
         if (questionType === 1) {
             let c = json[actualQuestionNumber]['c'];
             c.forEach((line) => {
-                    //let choiceId = line['i'];
+                    let choiceId = line['i'];
                     let choiceText = line['t'];
-                    div.innerHTML += "\n<input type=\"radio\" name=\""+ actualQuestionNumber +"\">" + choiceText;
+                    div.innerHTML +=
+                        "\n<input type=\"radio\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\" value=\""+ choiceId +"\">" + choiceText;
                 }
             );
         } else if (questionType === 2){
@@ -35,42 +35,46 @@
         } else if (questionType === 3) {
             let c = json[actualQuestionNumber]['c'];
             c.forEach((line) => {
-                    //let choiceId = line['i'];
+                    let choiceId = line['i'];
                     let choiceText = line['t'];
                     if(line['f']){
-                        div.innerHTML += "\n<input type=\"radio\" name=\""+ actualQuestionNumber +"\">" ;
-                        div.innerHTML += choiceText +"<input type=\"text\" name=\""+ actualQuestionNumber +"\">";
+                        div.innerHTML +=
+                            "\n<input type=\"radio\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\" value=\""+ choiceId +"\">";
+                        div.innerHTML += choiceText +"<input type=\"text\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\">";
                     } else {
-                        div.innerHTML += "\n<input type=\"radio\" name=\""+ actualQuestionNumber +"\">" + choiceText;
+                        div.innerHTML +=
+                            "\n<input type=\"radio\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\" value=\""+ choiceId +"\">" + choiceText;
                     }
                 }
             );
         } else if (questionType === 4) {
             let c = json[actualQuestionNumber]['c'];
             c.forEach((line) => {
-                    //let choiceId = line['i'];
+                    let choiceId = line['i'];
                     let choiceText = line['t'];
-                    div.innerText += "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\">" + choiceText;
+                    div.innerText +=
+                        "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\" id=\""+ choiceId +"\">" + choiceText;
                 }
             );
         } else if (questionType === 5) {
             let c = json[actualQuestionNumber]['c'];
             c.forEach((line) => {
-                    //let choiceId = line['i'];
+                    let choiceId = line['i'];
                     let choiceText = line['t'];
-                    div.innerHTML += "\n"+ choiceText +"<input type=\"text\" name=\""+ actualQuestionNumber +"\">";
+                    div.innerHTML += "\n"+ choiceText +"<input type=\"text\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\">";
                 }
             );
-        } else if (questionType === 6) {
+        } else if (questionType === 6) { //TODO: débuger car affichage en texte q88
             let c = json[actualQuestionNumber]['c'];
             c.forEach((line) => {
-                    //let choiceId = line['i'];
+                    let choiceId = line['i'];
                     let choiceText = line['t'];
                     if(line['f']){
-                        div.innerText += "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\">";
-                        div.innerHTML += choiceText +"<input type=\"text\" name=\""+ actualQuestionNumber +"\">";
+                        div.innerText += "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\" id=\""+ choiceId +"\">";
+                        div.innerHTML += choiceText +"<input type=\"text\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\">";
                     } else {
-                        div.innerText += "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\">" + choiceText;
+                        div.innerText +=
+                            "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\" id=\""+ choiceId +"\">" + choiceText;
                     }
                 }
             );
@@ -85,7 +89,6 @@
     }
 
     function loadPrevious() {
-        console.log(actualQuestionNumber);
         actualQuestionNumber--;
         if (actualQuestionNumber < 0) {
             actualQuestionNumber = 0;
