@@ -11,7 +11,7 @@ const jsontocsv = {
             let tabJson = JSON.parse(content);
 
             let string = token;
-            for (let column = 1; column <= 88; column++) {
+            for (let column = 1; column <= 88; ++column) {
                 if (tabJson[column] != null) {
                     for (let lign in tabJson[column]) {
                         string += ";" + JSON.stringify(tabJson[column][lign]);

@@ -45,7 +45,7 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
 
 
         // ------------------ Chargement d'une page avec condition -----------------------------
-        if (page === "/" && params["mdp"] === "etienne") { // Si le nom est '/'
+        if (page === "/") { // Si le nom est '/'
 
 
             // // ------------------ Création d'une page avec des infos contenu dans l'URL -----------------------------
