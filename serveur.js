@@ -19,7 +19,7 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
         hour: "numeric",
         minute: "numeric"
     });
-    console.log(date + " : " + req.connection.remoteAddress + " : " + page);
+    console.log(date + " : " + req.connection.remoteAddress + " : " +url.parse(req.url).href );
 
     let params = querystring.parse(url.parse(req.url).query); // On récupère les paramètres dans l'url puis les valeurs
 
