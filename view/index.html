@@ -16,26 +16,26 @@
     function load(){
         console.log("load");
         let div = document.getElementById('main');
-        let questionType = json[actualQuestionNumber]['answer_type'];
+        let questionType = json[actualQuestionNumber]['a'];
         //TODO: voir la taille max
-        div.innerHTML = json[actualQuestionNumber]['question_name'];
+        div.innerHTML = json[actualQuestionNumber]['q'];
 
         if (questionType === 1) {
-            let choices = json[actualQuestionNumber]['choices'];
-            choices.forEach((line) => {
-                    //let choiceId = line['id_choice'];
-                    let choiceText = line['choice_text'];
+            let c = json[actualQuestionNumber]['c'];
+            c.forEach((line) => {
+                    //let choiceId = line['i'];
+                    let choiceText = line['t'];
                     div.innerHTML += "\n<input type=\"radio\" name=\""+ actualQuestionNumber +"\">" + choiceText;
                 }
             );
         } else if (questionType === 2){
             div.innerHTML += "\n<input type=\"text\" name=\""+ actualQuestionNumber +"\">";
         } else if (questionType === 3) {
-            let choices = json[actualQuestionNumber]['choices'];
-            choices.forEach((line) => {
-                    //let choiceId = line['id_choice'];
-                    let choiceText = line['choice_text'];
-                    if(line['is_text_field']){
+            let c = json[actualQuestionNumber]['c'];
+            c.forEach((line) => {
+                    //let choiceId = line['i'];
+                    let choiceText = line['t'];
+                    if(line['f']){
                         div.innerHTML += "\n<input type=\"radio\" name=\""+ actualQuestionNumber +"\">" ;
                         div.innerHTML += choiceText +"<input type=\"text\" name=\""+ actualQuestionNumber +"\">";
                     } else {
@@ -44,27 +44,27 @@
                 }
             );
         } else if (questionType === 4) {
-            let choices = json[actualQuestionNumber]['choices'];
-            choices.forEach((line) => {
-                    //let choiceId = line['id_choice'];
-                    let choiceText = line['choice_text'];
+            let c = json[actualQuestionNumber]['c'];
+            c.forEach((line) => {
+                    //let choiceId = line['i'];
+                    let choiceText = line['t'];
                     div.innerText += "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\">" + choiceText;
                 }
             );
         } else if (questionType === 5) {
-            let choices = json[actualQuestionNumber]['choices'];
-            choices.forEach((line) => {
-                    //let choiceId = line['id_choice'];
-                    let choiceText = line['choice_text'];
+            let c = json[actualQuestionNumber]['c'];
+            c.forEach((line) => {
+                    //let choiceId = line['i'];
+                    let choiceText = line['t'];
                     div.innerHTML += "\n"+ choiceText +"<input type=\"text\" name=\""+ actualQuestionNumber +"\">";
                 }
             );
         } else if (questionType === 6) {
-            let choices = json[actualQuestionNumber]['choices'];
-            choices.forEach((line) => {
-                    //let choiceId = line['id_choice'];
-                    let choiceText = line['choice_text'];
-                    if(line['is_text_field']){
+            let c = json[actualQuestionNumber]['c'];
+            c.forEach((line) => {
+                    //let choiceId = line['i'];
+                    let choiceText = line['t'];
+                    if(line['f']){
                         div.innerText += "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\">";
                         div.innerHTML += choiceText +"<input type=\"text\" name=\""+ actualQuestionNumber +"\">";
                     } else {
