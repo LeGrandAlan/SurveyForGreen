@@ -74,7 +74,7 @@
         } else {
 
             let rep = JSON.parse(jsonrep);
-            actualQuestionNumber = Object.keys(rep)[0];
+            actualQuestionNumber = Math.max(Object.keys(rep)[Object.keys(rep).length -2]);
             if (json[actualQuestionNumber].a == 1) {
                 (json[actualQuestionNumber].c).forEach((line) => {
                         if (line.i == rep[Object.keys(rep)[0]].i) {
@@ -83,8 +83,11 @@
                     }
                 );
             } else {
-                actualQuestionNumber = json[actualQuestionNumber].n;
+                actualQuestionNumber = json[actualQuestionNumber].n ;
             }
+
+            jsonrep = jsonrep.slice(0, -1);
+            jsonrep += ",";
             load();
         }
 
@@ -102,31 +105,56 @@
         //TODO: voir la taille max
         div.setAttribute('questiontype', questionType);
         div.innerHTML = json[actualQuestionNumber].q;
-
+        let reponse = jsonrep.slice(0, -1);
+        reponse += "}";
+        reponse=JSON.parse(reponse);
         if (questionType === 1) {
             let c = json[actualQuestionNumber].c;
             c.forEach((line) => {
                     let choiceId = line.i;
                     let choiceText = line.t;
                     let nextQuestion = line.n;
-                    div.innerHTML +=
-                        "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\">" + choiceText;
+                    if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] == choiceId){
+                        div.innerHTML +=
+                            "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\" checked>" + choiceText;
+                    } else {
+                        div.innerHTML +=
+                            "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\">" + choiceText;
+                    }
+
                 }
             );
         } else if (questionType === 2) {
-            div.innerHTML += "\n<input type=\"text\" name=\"" + actualQuestionNumber + "\" next=\"" + nextQuestion + "\">";
+            if (reponse[actualQuestionNumber] != null){
+                div.innerHTML += "\n<input type=\"text\" name=\"" + actualQuestionNumber + "\" next=\"" + nextQuestion + "\" value=\""+ reponse[actualQuestionNumber]['t']+ "\">";
+            } else {
+                div.innerHTML += "\n<input type=\"text\" name=\"" + actualQuestionNumber + "\" next=\"" + nextQuestion + "\">";
+            }
+
         } else if (questionType === 3) {
             let c = json[actualQuestionNumber].c;
             c.forEach((line) => {
                     let choiceId = line.i;
                     let choiceText = line.t;
                     if (line.f) {
-                        div.innerHTML +=
-                            "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\">";
-                        div.innerHTML += choiceText + "<input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\">";
+                        if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] == line.i){
+                            div.innerHTML +=
+                                "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\" checked>";
+                            div.innerHTML += choiceText + "<input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\"value= \""+ reponse[actualQuestionNumber]['t']+ "\">";
+                        } else {
+                            div.innerHTML +=
+                                "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\">";
+                            div.innerHTML += choiceText + "<input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\">";
+                        }
+
                     } else {
-                        div.innerHTML +=
-                            "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\">" + choiceText;
+                        if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] == line.i){
+                            div.innerHTML +=
+                                "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\" checked>" + choiceText
+                        } else {
+                            div.innerHTML +=
+                                "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\">" + choiceText;
+                        }
                     }
                 }
             );
@@ -135,6 +163,7 @@
             c.forEach((line) => {
                     let choiceId = line.i;
                     let choiceText = line.t;
+
                     div.innerHTML +=
                         "\n<input type=\"checkbox\" name=\"" + actualQuestionNumber + "\" value=\"" + choiceText + "\" id=\"" + choiceId + "\" next=\"" + nextQuestion + "\">" + choiceText;
                 }
@@ -144,7 +173,22 @@
             c.forEach((line) => {
                     let choiceId = line.i;
                     let choiceText = line.t;
-                    div.innerHTML += "\n" + choiceText + "<input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" next=\"" + nextQuestion + "\">";
+                    let reptext ;
+                    let trouver = false;
+                    if (reponse[actualQuestionNumber] != null){
+                        (reponse[actualQuestionNumber].a).forEach( (test) => {
+                            if (test.i == choiceId){
+                                trouver = true;
+                                reptext = test.t;
+                            }
+                        });
+                    }
+
+                    if (trouver){
+                        div.innerHTML += "\n" + choiceText + "<input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" next=\"" + nextQuestion + "\" value= \"" + reptext + "\">";
+                    } else {
+                        div.innerHTML += "\n" + choiceText + "<input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" next=\"" + nextQuestion + "\">";
+                    }
                 }
             );
         } else if (questionType === 6) { //TODO: débuger car affichage en texte q87
@@ -152,13 +196,34 @@
             c.forEach((line) => {
                     let choiceId = line.i;
                     let choiceText = line.t;
-                    if (line['f']) {
-                        div.innerHTML += "\n<input type=\"checkbox\" name=\"" + actualQuestionNumber + "\" value=\"" + choiceText + "\" id=\"" + choiceId + "\" next=\"" + nextQuestion + "\">";
-                        div.innerHTML += choiceText + " <input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\">";
-                    } else {
-                        div.innerHTML +=
-                            "\n<input type=\"checkbox\" name=\"" + actualQuestionNumber + "\" value=\"" + choiceText + "\" id=\"" + choiceId + "\" next=\"" + nextQuestion + "\">" + choiceText;
+                    let reptext;
+                    let trouver = false;
+                    if (reponse[actualQuestionNumber] != null){
+                        (reponse[actualQuestionNumber].a).forEach( (test) => {
+                            if (test.i == line.i){
+                                trouver = true;
+                                reptext = test.t;
+                            }
+                        });
                     }
+                    if (trouver){
+                        if (line['f']) {
+                            div.innerHTML += "\n<input type=\"checkbox\" name=\"" + actualQuestionNumber + "\" value=\"" + choiceText + "\" id=\"" + choiceId + "\" next=\"" + nextQuestion + "\" checked>";
+                            div.innerHTML += choiceText + " <input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value = \""+ reptext +"\">";
+                        } else {
+                            div.innerHTML +=
+                                "\n<input type=\"checkbox\" name=\"" + actualQuestionNumber + "\" value=\"" + choiceText + "\" id=\"" + choiceId + "\" next=\"" + nextQuestion + "\" checked>" + choiceText;
+                        }
+                    } else {
+                        if (line['f']) {
+                            div.innerHTML += "\n<input type=\"checkbox\" name=\"" + actualQuestionNumber + "\" value=\"" + choiceText + "\" id=\"" + choiceId + "\" next=\"" + nextQuestion + "\">";
+                            div.innerHTML += choiceText + " <input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\">";
+                        } else {
+                            div.innerHTML +=
+                                "\n<input type=\"checkbox\" name=\"" + actualQuestionNumber + "\" value=\"" + choiceText + "\" id=\"" + choiceId + "\" next=\"" + nextQuestion + "\">" + choiceText;
+                        }
+                    }
+
                 }
             );
         }
@@ -244,7 +309,7 @@
                         if (values[i - 1] !== "") {
                             jsonrep += `"` + values[i - 1] + `"`;
                         } else {
-                            jsonrep += null;
+                            jsonrep += `""`;
                         }
                         jsonrep += `},`;
                     }
@@ -291,25 +356,33 @@
                         }
                         i++;
                     }
-                    if (tab.length < i) {
-                        tab.push("");
-                    }//TODO: si non coché ou si champs texte vide enlever si dessous
-                    jsonrep += `"` + actualQuestionNumber + `":{"a":[`;
-                    for (let i = 1; i < tab.length; i++) {
+                    actualQuestionNumber = json[actualQuestionNumber].n;
+                    let testnb =0;
+                    for (let i = 1; i <= tab.length; i++){
                         if (tab[i - 1] === "non coche") {
-                            continue;
-                        } else if (tab[i - 1] !== "") {
-                            jsonrep += `{"i":` + i + `,"t":`;
-                            jsonrep += `"` + tab[i - 1] + `"`;
-                        } else {
-                            jsonrep += `{"i":` + i + `,"t":`;
-                            jsonrep += null;
+                            testnb++;
                         }
-                        jsonrep += `},`;
                     }
-                    jsonrep = jsonrep.slice(0, -1);
-                    jsonrep += `]},`;
-                    break;
+                    if (testnb == 6) {
+                        jsonrep += `"` + beforeQuestion + `":{"a":[]},`;
+                    }else {
+                        jsonrep += `"` + beforeQuestion + `":{"a":[`;
+                        for (let i = 1; i <= tab.length; i++) {
+                            if (tab[i - 1] === "non coche") {
+                                continue;
+                            } else if (tab[i - 1] !== "") {
+                                jsonrep += `{"i":` + i + `,"t":`;
+                                jsonrep += `"` + tab[i - 1] + `"`;
+                            } else {
+                                jsonrep += `{"i":` + i + `,"t":`;
+                                jsonrep += `""`;
+                            }
+                            jsonrep += `},`;
+                        }
+                        jsonrep = jsonrep.slice(0, -1);
+                        jsonrep += `]},`;
+                        break;
+                    }
             }
         }
         if (!isNaN(actualQuestionNumber)) {
