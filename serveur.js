@@ -17,7 +17,7 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
         hour: "numeric",
         minute: "numeric"
     });
-    console.log(date + " : " + page);
+    console.log(date + " : " + req.connection.remoteAddress + " : " + page);
 
     let params = querystring.parse(url.parse(req.url).query); // On récupère les paramètres dans l'url puis les valeurs
 
@@ -81,6 +81,9 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
 // "</script>\n";
 
 
+    } else if (page === 'favicon.ico') {
+        res.writeHead(202, {"Content-Type": "img/plain"});
+        res.end(null);
     } else {
         res.writeHead(404, {"Content-Type": "text/plain"});
         res.end('Erreur 404 : Page introuvable');
