@@ -10,7 +10,6 @@
     let buttonsSave = "\n <button onclick=\"save();\" type=\"button\">Sauvegarder</button>";
 
     function save() {
-
         if (jsonrep == null) {
             window.alert("Formulaire non enregistrée car il faut validée au moins la première question");
         } else {
@@ -30,6 +29,7 @@
         //TODO: compresser le texte
         div.innerHTML = "With the support of ADEME, the Ministry of Ecology, Energy and the Sea and the Ministry of Economy and Finance, the association AGIT (Alliance for Green IT) and the eco-organizations of the recycling network of Waste Electrical and Electronic Equipment (WEEE) organize a survey to assess the deposits of computer and office equipment present in companies and more generally on the maturity of companies in France in the use of eco-responsible digital services. The duration of the questionnaire is estimated at 15 minutes if you are able to answer questions directly. You can return at any time on the questionnaire, answer in several times, your previous answers are recorded. In case of modification, only the last answer will be taken into account. You can submit this questionnaire to several people in your organization. All you have to do is simply share the link to the questionnaire. Thank you for participating in this survey. Your answer is invaluable to us to constitute the most representative sample of the companies in France.";
         div.innerHTML += buttons += buttonsSave;
+        jsonrep = "{\"token\":{\"i\":\""+ token +"\"},";
     }
 
     function conclusion() {
@@ -119,22 +119,25 @@
             switch (div.getAttribute("questiontype")) {
                 case "1":
                     for (let line of questions) {
-                        //questions.forEach((line) => {
                         if (line.checked) {
                             value = line.getAttribute("value");
                             let questionId = line.getAttribute("name");
+                            jsonrep += `"`+ actualQuestionNumber +`":{"i":`;
+                            jsonrep += value+`},`;
                             actualQuestionNumber = parseInt(line.getAttribute("next"));
                             if (isNaN(actualQuestionNumber)) {
                                 conclusion();
                                 break;
                             }
                         }
-                    }//);
+                    }
                     break;
                 case "2":
                     value = questions[0].value;
                     if (value !== "") {
+                        jsonrep += `"`+ actualQuestionNumber +`":{"t":"`;
                         actualQuestionNumber = parseInt(questions[0].getAttribute("next"));
+                        jsonrep += value+`"},`;
                     }
                     break;
                 case "3":
@@ -146,6 +149,9 @@
                                 value = line.getAttribute("value");
                                 findChecked = true;
                                 actualQuestionNumber = parseInt(line.getAttribute("next"));
+                                jsonrep += `"`+ questionNumber +`":{"i":`+ value +`,`;
+                                jsonrep += `"t":`;
+                                jsonrep += null+`},`;
                             }
                         } else if (findChecked && line.getAttribute("type") === "text") {
                             // le texte correspond à la case cochée
@@ -153,12 +159,18 @@
                                 value = line.value;
                                 if (value === "") {
                                     actualQuestionNumber = questionNumber;
+                                    jsonrep = jsonrep.slice(0, -24);
+                                } else {
+                                    jsonrep = jsonrep.slice(0, -12);
+                                    jsonrep += `"t":"`;
+                                    jsonrep += value+`"},`;
                                 }
                             }
                         }
                     });
                     break;
                 case "5":
+                    let qnumber = actualQuestionNumber;
                     let values = [];
                     questions.forEach((line) => {
                         if (line.value !== "") {
@@ -168,6 +180,18 @@
                         }
                         actualQuestionNumber = parseInt(line.getAttribute("next"));
                     });
+                    jsonrep += `"`+ qnumber +`":{"a":[`;
+                    for (let i=1; i <= values.length; i++){
+                        jsonrep += `{"i":`+i+`,"t":`;
+                        if(values[i-1] !== ""){
+                            jsonrep += `"`+ values[i-1] +`"`;
+                        } else {
+                            jsonrep += null;
+                        }
+                        jsonrep += `},`;
+                    }
+                    jsonrep = jsonrep.slice(0, -1);
+                    jsonrep += `]},`;
                     break;
                 case "6":
                     let tab = [];
@@ -191,7 +215,7 @@
                                     tab.push(value_text);
                                 }
                             } else {
-                                tab.push("");
+                                tab.push("non coche");
                             }
                         } else if (findChecked && line.getAttribute("type") === "text") {
                             // le texte correspond à la case cochée
@@ -211,7 +235,22 @@
                     }
                     if (tab.length < i) {
                         tab.push("");
+                    }//TODO: si non coché ou si champs texte vide enlever si dessous
+                    jsonrep += `"`+ actualQuestionNumber +`":{"a":[`;
+                    for (let i=1; i < tab.length; i++){
+                        if (tab[i-1] === "non coche"){
+                            continue;
+                        } else if (tab[i-1] !== "") {
+                            jsonrep += `{"i":`+i+`,"t":`;
+                            jsonrep += `"`+ tab[i-1] +`"`;
+                        } else {
+                            jsonrep += `{"i":`+i+`,"t":`;
+                            jsonrep += null;
+                        }
+                        jsonrep += `},`;
                     }
+                    jsonrep = jsonrep.slice(0, -1);
+                    jsonrep += `]},`;
                     break;
             }
         }
