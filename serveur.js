@@ -62,7 +62,7 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
                                 fs.readFile("./data/jsonanswer/" + params['token'] + '.json', null, (err, content) => {
                                     if (err) {
                                         console.log(err);
-                                        let toEncode = "\n<script>var token = '" + Math.random().toString(36).substring(2) + "';var json = \`" + data + "\`; var jsonrep =  null ;</script>\n";
+                                        let toEncode = "\n<script>var token = '" + Math.random().toString(36).substring(2) + "';var json = \`" + data + "\`; var jsonrep =  "+null+" ;</script>\n";
                                         html += toEncode;
                                     } else {
                                         let toEncode = "\n<script>var token = \`" + params['token'] + "\`;var json = \`" + data + "\`; var jsonrep = \`" + content + "\`;</script>\n";
@@ -76,7 +76,7 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
                                     });
                                 });
                             } else {
-                                let toEncode = "\n<script>var token = \`" + Math.random().toString(36).substring(2) + "\`;var json = \`" + data + "\`; var jsonrep =  null ;</script>\n";
+                                let toEncode = "\n<script>var token = \`" + Math.random().toString(36).substring(2) + "\`;var json = \`" + data + "\`; var jsonrep =  "+null+" ;</script>\n";
                                 html += toEncode;
                                 fs.readFile('./view/index.html', null, (err, data3) => {
                                     html += data3;
