@@ -28,8 +28,9 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
     if (req.method === "POST") {
         let lejson = "";
         req.on("data", (chunk) => {
-            fs.writeFileSync("data/jsonanswer/" + (((JSON.parse(chunk.toString()))["token"])['i']) + ".json", chunk.toString(), "UTF-8");
+            fs.writeFileSync("data/jsonanswer/" + (((JSON.parse(chunk.toString()))["token"])["i"]) + ".json", chunk.toString(), "UTF-8");
         });
+
     }
 
 
