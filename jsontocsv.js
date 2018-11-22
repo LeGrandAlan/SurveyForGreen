@@ -17,7 +17,6 @@ const jsontocsv = {
                         string += ";" + JSON.stringify(tabJson[column][lign]);
                     }
                 } else string += ";";
-
             }
             string = string.replace(/\"[it]\":/g, '');
             fs.appendFile(megaCsvPath, string, (err) => {
