@@ -12,11 +12,12 @@
         if (jsonrep == null) {
             window.alert("Formulaire non enregistrée car il faut validée au moins la première question");
         } else {
-            console.log("contenu=" + jsonrep);
+            jsonrep = jsonrep.slice(0, -1);
+            jsonrep += "}";
             fetch(document.location.href, {
                 headers: new Headers({"Accept": "application/json"}),
                 method: "POST",
-                body: JSON.stringify(jsonrep)
+                body: jsonrep
             });
             window.prompt("Formulaire à bien été enregistrée, vous pouvez maintement le recupérer ou le faire partager avec l'url suivante : ", document.location.href.substring(0, document.location.href.lastIndexOf("/")) + "/?mdp=etienne&token=" + token);
 
@@ -165,7 +166,7 @@
                                     actualQuestionNumber = questionNumber;
                                     jsonrep = jsonrep.slice(0, -24);
                                 } else {
-                                    jsonrep = jsonrep.slice(0, -12);
+                                    jsonrep = jsonrep.slice(0, -10);
                                     jsonrep += `"t":"`;
                                     jsonrep += value+`"},`;
                                 }

@@ -32,14 +32,13 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
 
         let params = querystring.parse(url.parse(req.url).query); // On récupère les paramètres dans l'url puis les valeurs
 
-
-        // ------------------ Savegarde fichier -----------------------------
-        if (req.method === "POST") {
-            let lejson = "";
-            req.on("data", (chunk) => {
-                fs.writeFileSync("data/jsonanswer/" + (((JSON.parse(chunk.toString()))["token"])['i']) + ".json", chunk.toString(), "UTF-8");
-            });
-        }
+    // ------------------ Savegarde fichier -----------------------------
+    if (req.method === "POST") {
+        let lejson = "";
+        req.on("data", (chunk) => {
+            fs.writeFileSync("data/jsonanswer/" + (((JSON.parse(chunk.toString()))["token"])['i']) + ".json", chunk.toString(), "UTF-8");
+        });
+    }
 
 
         // ------------------ Chargement d'une page avec condition -----------------------------
