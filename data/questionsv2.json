@@ -1047,6 +1047,27 @@
       }
     ]
   },
+  "52" : {
+    "a": 1,
+    "q" : "Do you have those equipments in your compagny:\\nLaptops, digital tablets",
+    "c": [
+      {
+        "i": 1,
+        "t": "Used",
+        "n": 53
+      },
+      {
+        "i": 2,
+        "t": "Not used functional",
+        "n": 53
+      },
+      {
+        "i": 3,
+        "t": "Neither used nor functional",
+        "n": 53
+      }
+    ]
+  },
   "53" : {
     "a": 1,
     "q" : "Do you have those equipments in your compagny:\\n Small printers (<15kg, potentially used by a household)",
