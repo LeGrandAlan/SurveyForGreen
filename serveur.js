@@ -12,7 +12,12 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
 
     // ------------------ Parsing de l'url -----------------------------
     let page = url.parse(req.url).pathname; // On parse le nom dans l'url
-    console.log(Date.now() + " : "+page);
+    let date = new Date().toLocaleTimeString('en-US', {
+        hour12: false,
+        hour: "numeric",
+        minute: "numeric"
+    });
+    console.log(date + " : " + page);
 
     let params = querystring.parse(url.parse(req.url).query); // On récupère les paramètres dans l'url puis les valeurs
 
