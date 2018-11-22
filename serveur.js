@@ -14,11 +14,12 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
     let page = url.parse(req.url).pathname; // On parse le nom dans l'url
     console.log(page);
 
+    let params = querystring.parse(url.parse(req.url).query); // On récupère les paramètres dans l'url puis les valeurs
+
     // ------------------ Chargement d'une page avec condition -----------------------------
-    if (page === '/') { // Si le nom est '/'
+    if (page === '/' && params['mdp']==="etienne") { // Si le nom est '/'
 
         // // ------------------ Création d'une page avec des infos contenu dans l'URL -----------------------------
-        let params = querystring.parse(url.parse(req.url).query); // On récupère les paramètres dans l'url puis les valeurs
         // res.writeHead(200, {"Content-Type": "text/html"});
         res.writeHead(200, {'Content-Type': 'text/html', 'Content-Encoding': 'gzip'});
         if ('token' in params) { // Si il y a un nom et un prnom dans l'url
