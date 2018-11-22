@@ -20,6 +20,7 @@
         let questionType = json[actualQuestionNumber]['a'];
         let nextQuestion = json[actualQuestionNumber]['n'];
         //TODO: voir la taille max
+        div.setAttribute('questiontype', questionType);
         div.innerHTML = json[actualQuestionNumber]['q'];
 
         if (questionType === 1) {
@@ -86,7 +87,63 @@
     }
 
     function loadNext() {
-        actualQuestionNumber++;
+        // si on était à l'intro
+        if(actualQuestionNumber === 0) {
+            actualQuestionNumber = 1;
+        } else {
+            //récupération de la réponse
+            let div = document.getElementById('main');
+            let questions = document.getElementsByName(actualQuestionNumber);
+            let value;
+            switch (div.getAttribute('questiontype')) {
+                case "1":
+                    questions.forEach((line) => {
+                        if(line.checked) {
+                            value = line.getAttribute('value');
+                            let questionId = line.getAttribute('name');
+                            actualQuestionNumber = line.getAttribute('next');
+                        }
+                    });
+                    break;
+                case "2":
+                    value = questions[0].value;
+                    if(value !== ""){
+                        actualQuestionNumber = questions[0].getAttribute('next');
+                    }
+                    break;
+                case "3":
+                    //TODO: il faut regarder pour les IDs si un type radio a un type texte
+                    let findChecked = false;
+                    questions.forEach((line) => {
+                        if(line.getAttribute('type') === "radio"){
+                            if(line.checked) {
+                                value = line.getAttribute('value');
+                                findChecked = true;
+                                actualQuestionNumber = line.getAttribute('next');
+                            }
+                        } else if(findChecked && line.getAttribute('type') === "text"){
+                            // le texte correspond à la case cochée
+                            if(line.getAttribute('id') === value){
+                                value = line.value;
+                                if(value === ""){
+                                    actualQuestionNumber--;
+                                }
+                            }
+                        }
+                    });
+                    break;
+                case "4":
+                    let values = [];
+                    questions.forEach((line) => {
+                        if(line.checked) {
+                            value = line.getAttribute('value');
+                            let questionId = line.getAttribute('name');
+                            actualQuestionNumber = line.getAttribute('next');
+                        }
+                    });
+                    break;
+            }
+        }
         load();
     }
 
