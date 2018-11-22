@@ -1,11 +1,11 @@
 <script>
-    'use strict';
+    "use strict";
 
     json = JSON.parse(json);
 
-    console.log("Token :"+ token);
+    console.log("Token :" + token);
 
-    let buttons = "\n<span class=\"arrow\" onclick=\"loadPrevious();\">&#8249;</span><span style='float: right' class=\"arrow\" onclick=\"loadNext();\">&#8250;</span>";
+    let buttons = "\n\n\n<span class=\"arrow\" onclick=\"loadPrevious();\">&#xA0;&#8249;&#xA0;</span><span style='float: right' class=\"arrow\" onclick=\"loadNext();\">&#xA0;&#8250;&#xA0;</span>";
     let actualQuestionNumber = 0;
     let buttonsSave = "\n <button onclick=\"save();\" type=\"button\">Sauvegarder</button>";
 
@@ -14,8 +14,8 @@
         if (jsonrep == null) {
             window.alert("Formulaire non enregistrée car il faut validée au moins la première question");
         } else {
-            console.log("contenu="+jsonrep);
-           fetch(document.location.href, {
+            console.log("contenu=" + jsonrep);
+            fetch(document.location.href, {
                 headers: new Headers({"Accept": "application/json"}),
                 method: "POST",
                 body: JSON.stringify(jsonrep)
@@ -26,80 +26,80 @@
     }
 
     function intro() {
-        let div = document.getElementById('main');
+        let div = document.getElementById("main");
         //TODO: compresser le texte
         div.innerHTML = "With the support of ADEME, the Ministry of Ecology, Energy and the Sea and the Ministry of Economy and Finance, the association AGIT (Alliance for Green IT) and the eco-organizations of the recycling network of Waste Electrical and Electronic Equipment (WEEE) organize a survey to assess the deposits of computer and office equipment present in companies and more generally on the maturity of companies in France in the use of eco-responsible digital services. The duration of the questionnaire is estimated at 15 minutes if you are able to answer questions directly. You can return at any time on the questionnaire, answer in several times, your previous answers are recorded. In case of modification, only the last answer will be taken into account. You can submit this questionnaire to several people in your organization. All you have to do is simply share the link to the questionnaire. Thank you for participating in this survey. Your answer is invaluable to us to constitute the most representative sample of the companies in France.";
-        div.innerHTML += buttons +=buttonsSave ;
+        div.innerHTML += buttons += buttonsSave;
     }
 
     function conclusion() {
-        let div = document.getElementById('main');
+        let div = document.getElementById("main");
         div.innerHTML = "Merci de votre paricipation";
     }
 
-    function load(){
-        let div = document.getElementById('main');
-        let questionType = json[actualQuestionNumber]['a'];
-        let nextQuestion = json[actualQuestionNumber]['n'];
+    function load() {
+        let div = document.getElementById("main");
+        let questionType = json[actualQuestionNumber].a;
+        let nextQuestion = json[actualQuestionNumber].n;
         //TODO: voir la taille max
         div.setAttribute('questiontype', questionType);
-        div.innerHTML = json[actualQuestionNumber]['q'];
+        div.innerHTML = json[actualQuestionNumber].q;
 
         if (questionType === 1) {
-            let c = json[actualQuestionNumber]['c'];
+            let c = json[actualQuestionNumber].c;
             c.forEach((line) => {
-                    let choiceId = line['i'];
-                    let choiceText = line['t'];
-                    let nextQuestion = line['n'];
+                    let choiceId = line.i;
+                    let choiceText = line.t;
+                    let nextQuestion = line.n;
                     div.innerHTML +=
-                        "\n<input type=\"radio\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\" value=\""+ choiceId +"\" next=\""+ nextQuestion +"\">" + choiceText;
+                        "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\">" + choiceText;
                 }
             );
-        } else if (questionType === 2){
-            div.innerHTML += "\n<input type=\"text\" name=\""+ actualQuestionNumber +"\" next=\""+ nextQuestion +"\">";
+        } else if (questionType === 2) {
+            div.innerHTML += "\n<input type=\"text\" name=\"" + actualQuestionNumber + "\" next=\"" + nextQuestion + "\">";
         } else if (questionType === 3) {
-            let c = json[actualQuestionNumber]['c'];
+            let c = json[actualQuestionNumber].c;
             c.forEach((line) => {
-                    let choiceId = line['i'];
-                    let choiceText = line['t'];
-                    if(line['f']){
+                    let choiceId = line.i;
+                    let choiceText = line.t;
+                    if (line.f) {
                         div.innerHTML +=
-                            "\n<input type=\"radio\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\" value=\""+ choiceId +"\" next=\""+ nextQuestion +"\">";
-                        div.innerHTML += choiceText +"<input type=\"text\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\">";
+                            "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\">";
+                        div.innerHTML += choiceText + "<input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\">";
                     } else {
                         div.innerHTML +=
-                            "\n<input type=\"radio\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\" value=\""+ choiceId +"\" next=\""+ nextQuestion +"\">" + choiceText;
+                            "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\">" + choiceText;
                     }
                 }
             );
         } else if (questionType === 4) {
-            let c = json[actualQuestionNumber]['c'];
+            let c = json[actualQuestionNumber].c;
             c.forEach((line) => {
-                    let choiceId = line['i'];
-                    let choiceText = line['t'];
+                    let choiceId = line.i;
+                    let choiceText = line.t;
                     div.innerHTML +=
-                        "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\" id=\""+ choiceId +"\" next=\""+ nextQuestion +"\">" + choiceText;
+                        "\n<input type=\"checkbox\" name=\"" + actualQuestionNumber + "\" value=\"" + choiceText + "\" id=\"" + choiceId + "\" next=\"" + nextQuestion + "\">" + choiceText;
                 }
             );
         } else if (questionType === 5) {
-            let c = json[actualQuestionNumber]['c'];
+            let c = json[actualQuestionNumber].c;
             c.forEach((line) => {
-                    let choiceId = line['i'];
-                    let choiceText = line['t'];
-                    div.innerHTML += "\n"+ choiceText +"<input type=\"text\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\" next=\""+ nextQuestion +"\">";
+                    let choiceId = line.i;
+                    let choiceText = line.t;
+                    div.innerHTML += "\n" + choiceText + "<input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" next=\"" + nextQuestion + "\">";
                 }
             );
         } else if (questionType === 6) { //TODO: débuger car affichage en texte q87
-            let c = json[actualQuestionNumber]['c'];
+            let c = json[actualQuestionNumber].c;
             c.forEach((line) => {
-                    let choiceId = line['i'];
-                    let choiceText = line['t'];
-                    if(line['f']){
-                        div.innerHTML += "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\" id=\""+ choiceId +"\" next=\""+ nextQuestion +"\">";
-                        div.innerHTML += choiceText +" <input type=\"text\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\">";
+                    let choiceId = line.i;
+                    let choiceText = line.t;
+                    if (line['f']) {
+                        div.innerHTML += "\n<input type=\"checkbox\" name=\"" + actualQuestionNumber + "\" value=\"" + choiceText + "\" id=\"" + choiceId + "\" next=\"" + nextQuestion + "\">";
+                        div.innerHTML += choiceText + " <input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\">";
                     } else {
                         div.innerHTML +=
-                            "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\" id=\""+ choiceId +"\" next=\""+ nextQuestion +"\">" + choiceText;
+                            "\n<input type=\"checkbox\" name=\"" + actualQuestionNumber + "\" value=\"" + choiceText + "\" id=\"" + choiceId + "\" next=\"" + nextQuestion + "\">" + choiceText;
                     }
                 }
             );
@@ -112,19 +112,19 @@
             actualQuestionNumber = 1;
         } else {
             //récupération de la réponse
-            let div = document.getElementById('main');
+            let div = document.getElementById("main");
             let questions = document.getElementsByName(actualQuestionNumber);
             let value;
             let findChecked;
-            switch (div.getAttribute('questiontype')) {
+            switch (div.getAttribute("questiontype")) {
                 case "1":
-                    for(let line of questions) {
-                    //questions.forEach((line) => {
-                        if(line.checked) {
-                            value = line.getAttribute('value');
-                            let questionId = line.getAttribute('name');
-                            actualQuestionNumber = parseInt(line.getAttribute('next'));
-                            if(isNaN(actualQuestionNumber)){
+                    for (let line of questions) {
+                        //questions.forEach((line) => {
+                        if (line.checked) {
+                            value = line.getAttribute("value");
+                            let questionId = line.getAttribute("name");
+                            actualQuestionNumber = parseInt(line.getAttribute("next"));
+                            if (isNaN(actualQuestionNumber)) {
                                 conclusion();
                                 break;
                             }
@@ -133,25 +133,25 @@
                     break;
                 case "2":
                     value = questions[0].value;
-                    if(value !== ""){
-                        actualQuestionNumber = parseInt(questions[0].getAttribute('next'));
+                    if (value !== "") {
+                        actualQuestionNumber = parseInt(questions[0].getAttribute("next"));
                     }
                     break;
                 case "3":
                     findChecked = false;
                     let questionNumber = actualQuestionNumber;
                     questions.forEach((line) => {
-                        if(line.getAttribute('type') === "radio"){
-                            if(line.checked) {
-                                value = line.getAttribute('value');
+                        if (line.getAttribute('type') === "radio") {
+                            if (line.checked) {
+                                value = line.getAttribute("value");
                                 findChecked = true;
-                                actualQuestionNumber = parseInt(line.getAttribute('next'));
+                                actualQuestionNumber = parseInt(line.getAttribute("next"));
                             }
-                        } else if(findChecked && line.getAttribute('type') === "text"){
+                        } else if (findChecked && line.getAttribute("type") === "text") {
                             // le texte correspond à la case cochée
-                            if(line.getAttribute('id') === value){
+                            if (line.getAttribute('id') === value) {
                                 value = line.value;
-                                if(value === ""){
+                                if (value === "") {
                                     actualQuestionNumber = questionNumber;
                                 }
                             }
@@ -161,12 +161,12 @@
                 case "5":
                     let values = [];
                     questions.forEach((line) => {
-                        if(line.value !== ""){
+                        if (line.value !== "") {
                             values.push(line.value);
                         } else {
                             values.push("");
                         }
-                        actualQuestionNumber = parseInt(line.getAttribute('next'));
+                        actualQuestionNumber = parseInt(line.getAttribute("next"));
                     });
                     break;
                 case "6":
@@ -174,18 +174,18 @@
                     let beforeQuestion = actualQuestionNumber;
                     findChecked = false;
                     let i = 0;
-                    for(let line of questions) {
-                        if(tab.includes("tableau incorrect")){
+                    for (let line of questions) {
+                        if (tab.includes("tableau incorrect")) {
                             tab = [];
                             break;
                         }
-                        if(line.getAttribute('type') === "checkbox"){
-                            if(line.checked) {
-                                value = line.getAttribute('id');
-                                let value_text = line.getAttribute('value');
+                        if (line.getAttribute("type") === "checkbox") {
+                            if (line.checked) {
+                                value = line.getAttribute("id");
+                                let value_text = line.getAttribute("value");
                                 findChecked = true;
-                                actualQuestionNumber = parseInt(line.getAttribute('next'));
-                                if(value === "") {
+                                actualQuestionNumber = parseInt(line.getAttribute("next"));
+                                if (value === "") {
                                     tab.push("");
                                 } else {
                                     tab.push(value_text);
@@ -193,15 +193,15 @@
                             } else {
                                 tab.push("");
                             }
-                        } else if(findChecked && line.getAttribute('type') === "text"){
+                        } else if (findChecked && line.getAttribute("type") === "text") {
                             // le texte correspond à la case cochée
-                            if(line.getAttribute('id') === value){
+                            if (line.getAttribute("id") === value) {
                                 value = line.value;
-                                if(value === ""){
+                                if (value === "") {
                                     actualQuestionNumber = beforeQuestion;
                                     tab.push("tableau incorrect");//TODO: voir si meilleure solution
                                 } else {
-                                    tab.splice(-1,1);
+                                    tab.splice(-1, 1);
                                     tab.push(value);
                                 }
                                 findChecked = false;
@@ -209,13 +209,13 @@
                         }
                         i++;
                     }
-                    if(tab.length < i){
+                    if (tab.length < i) {
                         tab.push("");
                     }
                     break;
             }
         }
-        if(!isNaN(actualQuestionNumber)) {
+        if (!isNaN(actualQuestionNumber)) {
             load();
         }
     }
@@ -225,7 +225,7 @@
         if (actualQuestionNumber < 0) {
             actualQuestionNumber = 0;
         }
-        if(actualQuestionNumber === 0){
+        if (actualQuestionNumber === 0) {
             intro();
         } else {
             load();
