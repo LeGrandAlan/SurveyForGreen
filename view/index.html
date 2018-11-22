@@ -34,7 +34,25 @@
         //TODO: compresser le texte
         div.innerHTML = "With the support of ADEME, the Ministry of Ecology, Energy and the Sea and the Ministry of Economy and Finance, the association AGIT (Alliance for Green IT) and the eco-organizations of the recycling network of Waste Electrical and Electronic Equipment (WEEE) organize a survey to assess the deposits of computer and office equipment present in companies and more generally on the maturity of companies in France in the use of eco-responsible digital services. The duration of the questionnaire is estimated at 15 minutes if you are able to answer questions directly. You can return at any time on the questionnaire, answer in several times, your previous answers are recorded. In case of modification, only the last answer will be taken into account. You can submit this questionnaire to several people in your organization. All you have to do is simply share the link to the questionnaire. Thank you for participating in this survey. Your answer is invaluable to us to constitute the most representative sample of the companies in France.";
         div.innerHTML += buttons;
-        jsonrep = "{\"token\":{\"i\":\""+ token +"\"},";
+        if (jsonrep == null){
+            jsonrep = "{\"token\":{\"i\":\""+ token +"\"},";
+        } else {
+
+            let rep= JSON.parse(jsonrep);
+            actualQuestionNumber= Object.keys(rep)[0] ;
+            if(json[actualQuestionNumber].a == 1){
+                (json[actualQuestionNumber].c).forEach((line) => {
+                        if (line.i==rep[Object.keys(rep)[0]].i){
+                            actualQuestionNumber=line.n;
+                        }
+                    }
+                );
+            } else {
+                actualQuestionNumber=json[actualQuestionNumber].n;
+            }
+            load();
+        }
+
     }
 
     function conclusion() {
