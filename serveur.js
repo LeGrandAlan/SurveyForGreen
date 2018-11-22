@@ -7,7 +7,6 @@ const fs = require("fs");
 const zlib = require("zlib");
 const jsontocsv = require("./jsontocsv");
 
-
 // On créer notre serveur
 let server = http.createServer(function (req, res) { // On reçoit la demande de connexion du client
 
@@ -19,7 +18,7 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
         hour: "numeric",
         minute: "numeric"
     });
-    console.log(date + " : " + req.connection.remoteAddress + " : " +url.parse(req.url).href );
+    console.log(date + " : " + req.connection.remoteAddress + " : " + url.parse(req.url).href);
 
     let params = querystring.parse(url.parse(req.url).query); // On récupère les paramètres dans l'url puis les valeurs
 
@@ -31,14 +30,15 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
         });
 
     }
+
+
     // ------------------ Chargement d'une page avec condition -----------------------------
     if (page === "/" && params["mdp"] === "etienne") { // Si le nom est '/'
 
+
         // // ------------------ Création d'une page avec des infos contenu dans l'URL -----------------------------
-        // res.writeHead(200, {"Content-Type": "text/html"});
 
         if (params["download"] === "true" && params["token"]) {
-
 
             fs.readFile("./data/jsonanswer/" + params["token"] + ".json", null, (err, data) => {
                 if (err) {
@@ -63,7 +63,7 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
                                 fs.readFile("./data/jsonanswer/" + params["token"] + ".json", null, (err, content) => {
                                     if (err) {
                                         console.log(err);
-                                        let toEncode = "\n<script>var token = '" + Math.random().toString(36).substring(2) + "';var json = \`" + data + "\`; var jsonrep =  "+null+" ;</script>\n";
+                                        let toEncode = "\n<script>var token = '" + Math.random().toString(36).substring(2) + "';var json = \`" + data + "\`; var jsonrep =  " + null + " ;</script>\n";
                                         html += toEncode;
                                     } else {
                                         let toEncode = "\n<script>var token = \`" + params['token'] + "\`;var json = \`" + data + "\`; var jsonrep = \`" + content + "\`;</script>\n";
@@ -77,7 +77,7 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
                                     });
                                 });
                             } else {
-                                let toEncode = "\n<script>var token = \`" + Math.random().toString(36).substring(2) + "\`;var json = \`" + data + "\`; var jsonrep =  "+null+" ;</script>\n";
+                                let toEncode = "\n<script>var token = \`" + Math.random().toString(36).substring(2) + "\`;var json = \`" + data + "\`; var jsonrep =  " + null + " ;</script>\n";
                                 html += toEncode;
                                 fs.readFile("./view/index.html", null, (err, data3) => {
                                     html += data3;
@@ -97,6 +97,9 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
 // "</script>\n";
 
 
+    } else if(page==='/favicon.ico'){
+        res.writeHead(200, {'Content-Type': 'image/x-icon'} );
+        res.end();
     } else {
         // TODO : remettre
         // res.writeHead(404, {"Content-Type": "text/plain"});
