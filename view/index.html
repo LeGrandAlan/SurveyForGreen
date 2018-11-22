@@ -55,7 +55,7 @@
             c.forEach((line) => {
                     let choiceId = line['i'];
                     let choiceText = line['t'];
-                    div.innerText +=
+                    div.innerHTML +=
                         "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\" id=\""+ choiceId +"\" next=\""+ nextQuestion +"\">" + choiceText;
                 }
             );
@@ -73,10 +73,10 @@
                     let choiceId = line['i'];
                     let choiceText = line['t'];
                     if(line['f']){
-                        div.innerText += "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\" id=\""+ choiceId +"\" next=\""+ nextQuestion +"\">";
+                        div.innerHTML += "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\" id=\""+ choiceId +"\" next=\""+ nextQuestion +"\">";
                         div.innerHTML += choiceText +" <input type=\"text\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\">";
                     } else {
-                        div.innerText +=
+                        div.innerHTML +=
                             "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\" id=\""+ choiceId +"\" next=\""+ nextQuestion +"\">" + choiceText;
                     }
                 }
@@ -101,14 +101,14 @@
                         if(line.checked) {
                             value = line.getAttribute('value');
                             let questionId = line.getAttribute('name');
-                            actualQuestionNumber = parseInt(line.getAttribute('next')); //TODO: mettre cast partout
+                            actualQuestionNumber = parseInt(line.getAttribute('next'));
                         }
                     });
                     break;
                 case "2":
                     value = questions[0].value;
                     if(value !== ""){
-                        actualQuestionNumber = questions[0].getAttribute('next');
+                        actualQuestionNumber = parseInt(questions[0].getAttribute('next'));
                     }
                     break;
                 case "3":
@@ -119,7 +119,7 @@
                             if(line.checked) {
                                 value = line.getAttribute('value');
                                 findChecked = true;
-                                actualQuestionNumber = line.getAttribute('next');
+                                actualQuestionNumber = parseInt(line.getAttribute('next'));
                             }
                         } else if(findChecked && line.getAttribute('type') === "text"){
                             // le texte correspond à la case cochée
@@ -140,7 +140,7 @@
                         } else {
                             values.push("");
                         }
-                        actualQuestionNumber = line.getAttribute('next');
+                        actualQuestionNumber = parseInt(line.getAttribute('next'));
                     });
                     break;
                 case "6":
