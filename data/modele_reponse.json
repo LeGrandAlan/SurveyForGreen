@@ -1,0 +1,45 @@
+// 1: Single Choice
+// 2: t
+// 3: Single choice + te
+// 4: multiple choice
+// 5: Plusieurs champs t
+// 6: multiple choice + t
+
+
+// i = id
+// a = answer
+// t = text
+
+{
+  "1" : {
+    "i" : 1
+  },
+
+  "2" : {
+    "t" : "whatever"
+  },
+
+  "3"  : {
+    "i" : 1,
+    "t" : "whatever"
+  },
+
+  "4" : {
+    "i" : [
+      1,2,3
+    ]
+  },
+  
+  "5;6" : {
+    "a" : [
+      {
+        "i": 1,
+        "t" : null
+      },
+      {
+        "i": 2,
+        "t" : "whatever"
+      }
+    ]
+  }
+}
