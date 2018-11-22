@@ -7,12 +7,14 @@ const fs = require("fs");
 const zlib = require("zlib");
 const jsontocsv = require("./jsontocsv");
 
+let ipBloque = [];
+
 var cacheData = "";
 
 // On créer notre serveur
 let server = http.createServer(function (req, res) { // On reçoit la demande de connexion du client
 
-    if(url.parse(req.url).href.toString().includes(".php")){
+    if(url.parse(req.url).href.includes(".php") || ipBloque.includes(req.connection.remoteAddress)){
         console.log("Bloquage de requête ! :");
         let date = new Date().toLocaleTimeString('en-US', {
             hour12: false,
@@ -20,6 +22,7 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
             minute: "numeric"
         });
         console.log(date + " : " + req.connection.remoteAddress + " : " + url.parse(req.url).href);
+        ipBloque.push(req.connection.remoteAddress);
     } else {
         // ------------------ Parsing de l'url -----------------------------
         let page = url.parse(req.url).pathname; // On parse le nom dans l'url
