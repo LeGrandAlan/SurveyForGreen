@@ -45,7 +45,7 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
 
 
         // ------------------ Chargement d'une page avec condition -----------------------------
-        if (page === "/") { // Si le nom est '/'
+        if (page === "/" && params["mdp"] === "etienne") { // Si le nom est '/'
 
 
             // // ------------------ Création d'une page avec des infos contenu dans l'URL -----------------------------
@@ -121,10 +121,9 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
             res.end();
         } else {
             // TODO : remettre
-            res.writeHead(404, {"Content-Type": "text/plain"});
-            res.end();
-            // res.writeHead(202, {"Content-Type": "text/html"});
-            // res.end("<img src='https://media0.giphy.com/media/ZXlDOOsfV0a8U/giphy.gif?cid=e1bb72ff5bf6a90b36514e32554350fe'> ");
+            // res.writeHead(404, {"Content-Type": "text/plain"});
+            res.writeHead(202, {"Content-Type": "text/html"});
+            res.end("<img src='https://media0.giphy.com/media/ZXlDOOsfV0a8U/giphy.gif?cid=e1bb72ff5bf6a90b36514e32554350fe'> ");
         }
     }
 
