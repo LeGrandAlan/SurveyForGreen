@@ -14,7 +14,8 @@
         } else {
             jsonrep = jsonrep.slice(0, -1);
             jsonrep += "}";
-            fetch(document.location.href, {onclick,
+            fetch(document.location.href, {
+                onclick,
                 headers: new Headers({"Accept": "application/json"}),
                 method: "POST",
                 body: jsonrep
@@ -25,7 +26,41 @@
     }
 
     function downloadCSV() {
+        let myHeaders = new Headers();
 
+
+        let myInit = {
+            method: 'GET',
+            headers: myHeaders,
+            mode: 'cors',
+            cache: 'default'
+        };
+
+        let myRequest = new Request('?mdp=etienne&download=true', myInit);
+
+        fetch(myRequest, myInit)
+            .then(function (response) {
+                return response.blob();
+            })
+            .then(function (myBlob) {
+                console.log(myBlob);
+                let filename = "resultat.csv";
+                let file = myBlob;
+                if (window.navigator.msSaveOrOpenBlob) // IE10+
+                    window.navigator.msSaveOrOpenBlob(file, filename);
+                else { // Others
+                    let a = document.createElement("a"),
+                        url = URL.createObjectURL(file);
+                    a.href = url;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    setTimeout(function () {
+                        document.body.removeChild(a);
+                        window.URL.revokeObjectURL(url);
+                    }, 0);
+                }
+            });
 
     }
 
@@ -34,21 +69,21 @@
         //TODO: compresser le texte
         div.innerHTML = "With the support of ADEME, the Ministry of Ecology, Energy and the Sea and the Ministry of Economy and Finance, the association AGIT (Alliance for Green IT) and the eco-organizations of the recycling network of Waste Electrical and Electronic Equipment (WEEE) organize a survey to assess the deposits of computer and office equipment present in companies and more generally on the maturity of companies in France in the use of eco-responsible digital services. The duration of the questionnaire is estimated at 15 minutes if you are able to answer questions directly. You can return at any time on the questionnaire, answer in several times, your previous answers are recorded. In case of modification, only the last answer will be taken into account. You can submit this questionnaire to several people in your organization. All you have to do is simply share the link to the questionnaire. Thank you for participating in this survey. Your answer is invaluable to us to constitute the most representative sample of the companies in France.";
         div.innerHTML += buttons;
-        if (jsonrep == null){
-            jsonrep = "{\"token\":{\"i\":\""+ token +"\"},";
+        if (jsonrep == null) {
+            jsonrep = "{\"token\":{\"i\":\"" + token + "\"},";
         } else {
 
-            let rep= JSON.parse(jsonrep);
-            actualQuestionNumber= Object.keys(rep)[0] ;
-            if(json[actualQuestionNumber].a == 1){
+            let rep = JSON.parse(jsonrep);
+            actualQuestionNumber = Object.keys(rep)[0];
+            if (json[actualQuestionNumber].a == 1) {
                 (json[actualQuestionNumber].c).forEach((line) => {
-                        if (line.i==rep[Object.keys(rep)[0]].i){
-                            actualQuestionNumber=line.n;
+                        if (line.i == rep[Object.keys(rep)[0]].i) {
+                            actualQuestionNumber = line.n;
                         }
                     }
                 );
             } else {
-                actualQuestionNumber=json[actualQuestionNumber].n;
+                actualQuestionNumber = json[actualQuestionNumber].n;
             }
             load();
         }
@@ -145,8 +180,8 @@
                         if (line.checked) {
                             value = line.getAttribute("value");
                             let questionId = line.getAttribute("name");
-                            jsonrep += `"`+ actualQuestionNumber +`":{"i":`;
-                            jsonrep += value+`},`;
+                            jsonrep += `"` + actualQuestionNumber + `":{"i":`;
+                            jsonrep += value + `},`;
                             actualQuestionNumber = parseInt(line.getAttribute("next"));
                             if (isNaN(actualQuestionNumber)) {
                                 conclusion();
@@ -158,9 +193,9 @@
                 case "2":
                     value = questions[0].value;
                     if (value !== "") {
-                        jsonrep += `"`+ actualQuestionNumber +`":{"t":"`;
+                        jsonrep += `"` + actualQuestionNumber + `":{"t":"`;
                         actualQuestionNumber = parseInt(questions[0].getAttribute("next"));
-                        jsonrep += value+`"},`;
+                        jsonrep += value + `"},`;
                     }
                     break;
                 case "3":
@@ -172,9 +207,9 @@
                                 value = line.getAttribute("value");
                                 findChecked = true;
                                 actualQuestionNumber = parseInt(line.getAttribute("next"));
-                                jsonrep += `"`+ questionNumber +`":{"i":`+ value +`,`;
+                                jsonrep += `"` + questionNumber + `":{"i":` + value + `,`;
                                 jsonrep += `"t":`;
-                                jsonrep += null+`},`;
+                                jsonrep += null + `},`;
                             }
                         } else if (findChecked && line.getAttribute("type") === "text") {
                             // le texte correspond à la case cochée
@@ -186,7 +221,7 @@
                                 } else {
                                     jsonrep = jsonrep.slice(0, -10);
                                     jsonrep += `"t":"`;
-                                    jsonrep += value+`"},`;
+                                    jsonrep += value + `"},`;
                                 }
                             }
                         }
@@ -203,11 +238,11 @@
                         }
                         actualQuestionNumber = parseInt(line.getAttribute("next"));
                     });
-                    jsonrep += `"`+ qnumber +`":{"a":[`;
-                    for (let i=1; i <= values.length; i++){
-                        jsonrep += `{"i":`+i+`,"t":`;
-                        if(values[i-1] !== ""){
-                            jsonrep += `"`+ values[i-1] +`"`;
+                    jsonrep += `"` + qnumber + `":{"a":[`;
+                    for (let i = 1; i <= values.length; i++) {
+                        jsonrep += `{"i":` + i + `,"t":`;
+                        if (values[i - 1] !== "") {
+                            jsonrep += `"` + values[i - 1] + `"`;
                         } else {
                             jsonrep += null;
                         }
@@ -259,15 +294,15 @@
                     if (tab.length < i) {
                         tab.push("");
                     }//TODO: si non coché ou si champs texte vide enlever si dessous
-                    jsonrep += `"`+ actualQuestionNumber +`":{"a":[`;
-                    for (let i=1; i < tab.length; i++){
-                        if (tab[i-1] === "non coche"){
+                    jsonrep += `"` + actualQuestionNumber + `":{"a":[`;
+                    for (let i = 1; i < tab.length; i++) {
+                        if (tab[i - 1] === "non coche") {
                             continue;
-                        } else if (tab[i-1] !== "") {
-                            jsonrep += `{"i":`+i+`,"t":`;
-                            jsonrep += `"`+ tab[i-1] +`"`;
+                        } else if (tab[i - 1] !== "") {
+                            jsonrep += `{"i":` + i + `,"t":`;
+                            jsonrep += `"` + tab[i - 1] + `"`;
                         } else {
-                            jsonrep += `{"i":`+i+`,"t":`;
+                            jsonrep += `{"i":` + i + `,"t":`;
                             jsonrep += null;
                         }
                         jsonrep += `},`;
