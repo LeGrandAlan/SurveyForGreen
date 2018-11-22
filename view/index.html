@@ -227,6 +227,10 @@
                 }
             );
         }
+        delete reponse[actualQuestionNumber];
+        jsonrep=JSON.stringify(reponse);
+        jsonrep = jsonrep.slice(0, -1);
+        jsonrep += ",";
         div.innerHTML += buttons;
     }
 
@@ -391,9 +395,14 @@
     }
 
     function loadPrevious() {
-        actualQuestionNumber--;
-        if (actualQuestionNumber < 0) {
+        let reponse = jsonrep.slice(0, -1);
+        reponse += "}";
+        reponse=JSON.parse(reponse);
+        console.log(Object.keys(reponse).length);
+        if (Object.keys(reponse).length ==1) {
             actualQuestionNumber = 0;
+        } else {
+            actualQuestionNumber= Math.max(Object.keys(reponse)[Object.keys(reponse).length -2 ]);
         }
         if (actualQuestionNumber === 0) {
             intro();
