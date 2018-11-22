@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const fs = require("fs");
 
@@ -6,7 +6,7 @@ const fs = require("fs");
 const jsontocsv = {
 
     jsonToCsv: function (token, megaCsvPath) {
-        fs.readFile("./data/tokenjson/" + token + '.json', null, (err, content) => {
+        fs.readFile("./data/tokenjson/" + token + ".json", null, (err, content) => {
             if (err) throw err;
             let tabJson = JSON.parse(content);
 
@@ -22,7 +22,7 @@ const jsontocsv = {
             string = string.replace(/\"[it]\":/g, '');
             fs.appendFile(megaCsvPath, string, (err) => {
                 if (err) throw err;
-                console.log('JSON mis dans le grand csv');
+                console.log("JSON mis dans le grand csv");
             });
         });
     }

@@ -1,11 +1,12 @@
-'use strict';
+"use strict";
 // On récupère les librairies
 const url = require("url");
-const http = require('http');
-const querystring = require('querystring');
+const http = require("http");
+const querystring = require("querystring");
 const fs = require("fs");
-const zlib = require('zlib');
-const jsontocsv = require('./jsontocsv');
+const zlib = require("zlib");
+const jsontocsv = require("./jsontocsv");
+
 
 // On créer notre serveur
 let server = http.createServer(function (req, res) { // On reçoit la demande de connexion du client
@@ -23,43 +24,43 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
     let params = querystring.parse(url.parse(req.url).query); // On récupère les paramètres dans l'url puis les valeurs
 
     // ------------------ Savegarde fichier -----------------------------
-    if (req.method === 'POST') {
-        var lejson = '';
-        req.on('data', (chunk) => {
-            fs.writeFileSync("data/jsonanswer/" + (((JSON.parse(chunk.toString()))['token'])['i']) + ".json", chunk.toString(), "UTF-8");
+    if (req.method === "POST") {
+        let lejson = "";
+        req.on("data", (chunk) => {
+            fs.writeFileSync("data/jsonanswer/" + (((JSON.parse(chunk.toString()))["token"]).i) + ".json", chunk.toString(), "UTF-8");
         });
 
     }
     // ------------------ Chargement d'une page avec condition -----------------------------
-    if (page === '/' && params['mdp'] === "etienne") { // Si le nom est '/'
+    if (page === "/" && params["mdp"] === "etienne") { // Si le nom est '/'
 
         // // ------------------ Création d'une page avec des infos contenu dans l'URL -----------------------------
         // res.writeHead(200, {"Content-Type": "text/html"});
 
-        if (params['download'] === "true" && params['token']) {
+        if (params["download"] === "true" && params["token"]) {
 
 
-            fs.readFile('./data/jsonanswer/' + params["token"] + '.json', null, (err, data) => {
+            fs.readFile("./data/jsonanswer/" + params["token"] + ".json", null, (err, data) => {
                 if (err) {
                     res.writeHead(404);
                 }
                 zlib.gzip(data, function (_, result) {
-                    res.setHeader('Content-disposition', 'attachment; filename=' + params['token'] + '.json');
-                    res.writeHead(200, {'Content-Encoding': 'gzip'});
+                    res.setHeader("Content-disposition", "attachment; filename=" + params["token"] + ".json");
+                    res.writeHead(200, {"Content-Encoding": "gzip"});
                     res.end(result);
                 });
             });
         } else {
-            res.writeHead(200, {'Content-Type': 'text/html', 'Content-Encoding': 'gzip'});
+            res.writeHead(200, {"Content-Type": "text/html", "Content-Encoding": "gzip"});
 
-            fs.readFile('./view/index_head.html', null, (err, data2) => {
+            fs.readFile("./view/index_head.html", null, (err, data2) => {
                     if (err) {
                         console.log(err);
                     } else {
                         let html = data2;
-                        fs.readFile('./data/questionsv2_min.json', null, (err, data) => {
-                            if (params['token']) {
-                                fs.readFile("./data/jsonanswer/" + params['token'] + '.json', null, (err, content) => {
+                        fs.readFile("./data/questionsv2_min.json", null, (err, data) => {
+                            if (params["token"]) {
+                                fs.readFile("./data/jsonanswer/" + params["token"] + ".json", null, (err, content) => {
                                     if (err) {
                                         console.log(err);
                                         let toEncode = "\n<script>var token = '" + Math.random().toString(36).substring(2) + "';var json = \`" + data + "\`; var jsonrep =  "+null+" ;</script>\n";
@@ -68,7 +69,7 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
                                         let toEncode = "\n<script>var token = \`" + params['token'] + "\`;var json = \`" + data + "\`; var jsonrep = \`" + content + "\`;</script>\n";
                                         html += toEncode;
                                     }
-                                    fs.readFile('./view/index.html', null, (err, data3) => {
+                                    fs.readFile("./view/index.html", null, (err, data3) => {
                                         html += data3;
                                         zlib.gzip(html, function (_, result) {
                                             res.end(result);
@@ -78,7 +79,7 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
                             } else {
                                 let toEncode = "\n<script>var token = \`" + Math.random().toString(36).substring(2) + "\`;var json = \`" + data + "\`; var jsonrep =  "+null+" ;</script>\n";
                                 html += toEncode;
-                                fs.readFile('./view/index.html', null, (err, data3) => {
+                                fs.readFile("./view/index.html", null, (err, data3) => {
                                     html += data3;
                                     zlib.gzip(html, function (_, result) {
                                         res.end(result);
