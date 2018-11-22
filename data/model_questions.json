@@ -4,6 +4,14 @@
 // 4: multiple choice
 // 5: Plusieurs champs text
 // 6: multiple choice + text
+
+// a answer_type
+// q question_name
+// c choices
+// i id_choice
+// t choice_text
+// n next_question_id
+// f is_text_field
 {
   "num-question": {
     "answer_type": 1,
