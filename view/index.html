@@ -18,6 +18,7 @@
     function load(){
         let div = document.getElementById('main');
         let questionType = json[actualQuestionNumber]['a'];
+        let nextQuestion = json[actualQuestionNumber]['n'];
         //TODO: voir la taille max
         div.innerHTML = json[actualQuestionNumber]['q'];
 
@@ -26,12 +27,13 @@
             c.forEach((line) => {
                     let choiceId = line['i'];
                     let choiceText = line['t'];
+                    let nextQuestion = line['n'];
                     div.innerHTML +=
-                        "\n<input type=\"radio\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\" value=\""+ choiceId +"\">" + choiceText;
+                        "\n<input type=\"radio\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\" value=\""+ choiceId +"\" next=\""+ nextQuestion +"\">" + choiceText;
                 }
             );
         } else if (questionType === 2){
-            div.innerHTML += "\n<input type=\"text\" name=\""+ actualQuestionNumber +"\">";
+            div.innerHTML += "\n<input type=\"text\" name=\""+ actualQuestionNumber +"\" next=\""+ nextQuestion +"\">";
         } else if (questionType === 3) {
             let c = json[actualQuestionNumber]['c'];
             c.forEach((line) => {
@@ -39,11 +41,11 @@
                     let choiceText = line['t'];
                     if(line['f']){
                         div.innerHTML +=
-                            "\n<input type=\"radio\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\" value=\""+ choiceId +"\">";
+                            "\n<input type=\"radio\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\" value=\""+ choiceId +"\" next=\""+ nextQuestion +"\">";
                         div.innerHTML += choiceText +"<input type=\"text\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\">";
                     } else {
                         div.innerHTML +=
-                            "\n<input type=\"radio\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\" value=\""+ choiceId +"\">" + choiceText;
+                            "\n<input type=\"radio\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\" value=\""+ choiceId +"\" next=\""+ nextQuestion +"\">" + choiceText;
                     }
                 }
             );
@@ -53,7 +55,7 @@
                     let choiceId = line['i'];
                     let choiceText = line['t'];
                     div.innerText +=
-                        "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\" id=\""+ choiceId +"\">" + choiceText;
+                        "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\" id=\""+ choiceId +"\" next=\""+ nextQuestion +"\">" + choiceText;
                 }
             );
         } else if (questionType === 5) {
@@ -61,7 +63,7 @@
             c.forEach((line) => {
                     let choiceId = line['i'];
                     let choiceText = line['t'];
-                    div.innerHTML += "\n"+ choiceText +"<input type=\"text\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\">";
+                    div.innerHTML += "\n"+ choiceText +"<input type=\"text\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\" next=\""+ nextQuestion +"\">";
                 }
             );
         } else if (questionType === 6) { //TODO: débuger car affichage en texte q88
@@ -70,11 +72,11 @@
                     let choiceId = line['i'];
                     let choiceText = line['t'];
                     if(line['f']){
-                        div.innerText += "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\" id=\""+ choiceId +"\">";
+                        div.innerText += "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\" id=\""+ choiceId +"\" next=\""+ nextQuestion +"\">";
                         div.innerHTML += choiceText +"<input type=\"text\" name=\""+ actualQuestionNumber +"\" id=\""+ choiceId +"\">";
                     } else {
                         div.innerText +=
-                            "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\" id=\""+ choiceId +"\">" + choiceText;
+                            "\n<input type=\"checkbox\" name=\""+ actualQuestionNumber +"\" value=\""+ choiceText +"\" id=\""+ choiceId +"\" next=\""+ nextQuestion +"\">" + choiceText;
                     }
                 }
             );
