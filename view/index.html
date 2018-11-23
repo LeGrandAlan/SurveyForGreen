@@ -68,6 +68,7 @@
 
     function intro() {
         let div = document.getElementById("main");
+        div.setAttribute('before', "Introduction");
         //TODO: compresser le texte
         div.innerHTML = "With the support of ADEME, the Ministry of Ecology, Energy and the Sea and the Ministry of Economy and Finance, the association AGIT (Alliance for Green IT) and the eco-organizations of the recycling network of Waste Electrical and Electronic Equipment (WEEE) organize a survey to assess the deposits of computer and office equipment present in companies and more generally on the maturity of companies in France in the use of eco-responsible digital services. The duration of the questionnaire is estimated at 15 minutes if you are able to answer questions directly. You can return at any time on the questionnaire, answer in several times, your previous answers are recorded. In case of modification, only the last answer will be taken into account. You can submit this questionnaire to several people in your organization. All you have to do is simply share the link to the questionnaire. Thank you for participating in this survey. Your answer is invaluable to us to constitute the most representative sample of the companies in France.";
         div.innerHTML += buttons;
@@ -118,7 +119,9 @@
 
         div.setAttribute('after', "█".repeat(actualQuestionNumber));
 
-        div.innerHTML = json[actualQuestionNumber].q;
+        div.innerHTML = "";
+        div.setAttribute('before', json[actualQuestionNumber].q);
+        //div.innerHTML = json[actualQuestionNumber].q;
         let reponse = jsonrep.slice(0, -1);
         reponse += "}";
         reponse=JSON.parse(reponse);
@@ -128,7 +131,7 @@
                     let choiceId = line.i;
                     let choiceText = line.t;
                     let nextQuestion = line.n;
-                    if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] == choiceId){
+                    if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] === choiceId){
                         div.innerHTML +=
                             "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\" checked>" + choiceText;
                     } else {
@@ -151,18 +154,18 @@
                     let choiceId = line.i;
                     let choiceText = line.t;
                     if (line.f) {
-                        if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] == line.i){
+                        if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] === line.i){
                             div.innerHTML +=
                                 "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\" checked>";
-                            div.innerHTML += choiceText + "<input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\"value= \""+ reponse[actualQuestionNumber]['t']+ "\">";
+                            div.innerHTML += choiceText + "<input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\"value= \""+ reponse[actualQuestionNumber]['t']+ "\" style='margin-left: 16px;'>";
                         } else {
                             div.innerHTML +=
                                 "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\">";
-                            div.innerHTML += choiceText + "<input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\">";
+                            div.innerHTML += choiceText + "<input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" style='margin-left: 16px;'>";
                         }
 
                     } else {
-                        if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] == line.i){
+                        if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] === line.i){
                             div.innerHTML +=
                                 "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\" checked>" + choiceText
                         } else {
@@ -191,7 +194,7 @@
                     let trouver = false;
                     if (reponse[actualQuestionNumber] != null){
                         (reponse[actualQuestionNumber].a).forEach( (test) => {
-                            if (test.i == choiceId){
+                            if (test.i === choiceId){
                                 trouver = true;
                                 reptext = test.t;
                             }
@@ -214,7 +217,7 @@
                     let trouver = false;
                     if (reponse[actualQuestionNumber] != null){
                         (reponse[actualQuestionNumber].a).forEach( (test) => {
-                            if (test.i == line.i){
+                            if (test.i === line.i){
                                 trouver = true;
                                 reptext = test.t;
                             }
@@ -417,7 +420,7 @@
         reponse += "}";
         reponse=JSON.parse(reponse);
         console.log(Object.keys(reponse).length);
-        if (Object.keys(reponse).length ==1) {
+        if (Object.keys(reponse).length === 1) {
             actualQuestionNumber = 0;
         } else {
             actualQuestionNumber= Math.max(Object.keys(reponse)[Object.keys(reponse).length -2 ]);

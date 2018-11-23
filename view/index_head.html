@@ -23,11 +23,10 @@
             white-space: pre-line;
 
             margin: 80px auto;
-            padding: 20px;
-            padding-top: 75px;
+            padding: 20px 20px 20px;
 
-            text-align: justify;
-            text-justify: inter-word;
+            /*text-align: justify;
+            text-justify: inter-word;*/
 
             width: 100%;
             max-width: 800px;
@@ -43,14 +42,24 @@
         }
 
         pre::before {
-            content: 'testbefore';/*attr(before); TO DO : ajouter un attribut before au pre*/
-            position: absolute;
+            content: attr(before);
+            /*position: absolute;
             top: 0;right: 0;left: 0;
-            font-size: 2em;
+            font-size: 1.4em;
+            background: #7abf89;
+            padding: 10px;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;*/
+            font-size: 1.4em;
             background: #7abf89;
             padding: 10px;
             border-top-left-radius: 6px;
             border-top-right-radius: 6px;
+            display: block;
+            width: calc(100% + 20px);
+            margin-left: -20px;
+            position: relative;
+            top: -20px;
         }
         pre::after {
             content: attr(after);/*'█'; '███████████████████████████████████';*/
@@ -83,7 +92,8 @@
             box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 6px;
 
         }
-        button.tel {
+
+        button {
             font-weight: bold;
             font-size: 20px;
             cursor: pointer;
@@ -93,30 +103,24 @@
             pointer-events: auto;
             border-radius: 6px;
             position: absolute;
-            left: 0;
-            margin-left: 20%;
             margin-top: 15px;
             box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 6px;
             border: none;
-            padding: 3px;
+            padding: 6px;
+        }
+
+        button:hover {
+            background: #678c99;
+        }
+
+        button.tel {
+            left: 0;
+            margin-left: 20%;
         }
 
         button.sauv {
-            font-weight: bold;
-            font-size: 20px;
-            cursor: pointer;
-            color: #ffffff;
-            background: #43a689;
-            opacity: 1;
-            pointer-events: auto;
-            border-radius: 6px;
-            position: absolute;
             right: 0;
             margin-right: 20%;
-            margin-top: 15px;
-            box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 6px;
-            border: none;
-            padding: 3px;
         }
 
         span.arrow:hover {
