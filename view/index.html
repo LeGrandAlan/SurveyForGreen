@@ -37,7 +37,6 @@
             window.alert("Formulaire non enregistrée car il faut validée au moins la première question");
         } else {
             fetch(document.location.href, {
-                onclick,
                 headers: new Headers({"Accept": "application/json"}),
                 method: "POST",
                 body: JSON.stringify(reponsepar)
@@ -131,11 +130,12 @@
      * Affiche la page de conclusion avec le boutton de téléchargement de tout les enregistrements
      */
     function conclusion() {
+        jsonrep= jsonrep.slice(0, -1);
+        jsonrep += "}";
         fetch(document.location.href, {
-            onclick,
             headers: new Headers({"Accept": "application/json"}),
             method: "POST",
-            body: JSON.stringify(reponsepar)
+            body: jsonrep
         });
         let div = document.getElementById("main");
         div.setAttribute('before', "Conclusion");
@@ -143,7 +143,7 @@
 
         div.innerHTML = "Thank you for your participation !\n\n ©F1Forever Twitter: @G1Forever3\n\n";
         div.innerHTML += downloadButton;
-
+        console.log(JSON.stringify(reponsepar));
     }
 
     /**

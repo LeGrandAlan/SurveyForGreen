@@ -47,6 +47,7 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
                     fs.writeFileSync("data/jsonanswer/" + (((JSON.parse(chunk.toString()))["token"])['i']) + ".json", chunk.toString(), "UTF-8");
                     if (((JSON.parse(chunk.toString()))["88"]) != null) {
                         jsontocsv.jsonToCsv((JSON.parse(chunk.toString()))["token"]['i'], "./data/megafile.csv");
+                        console.log("Je suis ici");
                     }
                     res.writeHead(202);
                     res.end();
