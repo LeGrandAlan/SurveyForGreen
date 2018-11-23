@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <style>
+
+
+
         body#body {
             margin: 0;
             padding: 0 40px 0 40px;
@@ -29,7 +32,7 @@
             width: 100%;
             max-width: 800px;
             min-width: 400px;
-
+            --width : 100%;
             font-family: 'Arimo', sans-serif;
             font-weight: 600;
             color: #ffffff;
@@ -50,19 +53,21 @@
             border-top-right-radius: 6px;
         }
         pre::after {
-            content: '█▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔█';/*attr(after); /*TO DO : ajouter un attribut before au pre*/
+            content: '████████████████████████████████████████████████████████████████████████████████████████';/*'█';/*'██'; /*'███':/*attr(after); /*TO DO : ajouter un attribut before au pre*/
             /*TO DO : ceci est un template, le tout premier caractère doit etre mis à la place de deux suivants
                         pour chaque id (si tu ne comprend pas attend que je me reveille cest compliqué à
                         expliquer comme ça...)*/
 
             position: absolute;
+            font-weight: bold;
             color: #7abf89;
             background: #43a689;
-            right: 18px;
-            left: 18px;
+            right: 20px;
+            left: 20px;
             bottom: -60px;
-            border-width: 12px;
-            letter-spacing: -7.5px;
+            border-width: 14px;
+            letter-spacing: -0.185em;
+            border-color: #7abf89;
         }
 
         span.arrow {
