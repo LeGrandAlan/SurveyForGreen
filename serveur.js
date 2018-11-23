@@ -85,8 +85,7 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
                         console.log("utilisation du cache !");
                         res.end(cacheData);
                     } else {
-                        //TODO: mettre fichiers min
-                        fs.readFile("./view/index_head.html", null, (err, data2) => {
+                        fs.readFile("./view/index_head_min.html", null, (err, data2) => {
                                 if (err) {
                                     console.log(err);
                                 } else {
@@ -102,7 +101,7 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
                                                     let toEncode = "\n<script>var token = \`" + params['token'] + "\`;var json = \`" + data + "\`; var jsonrep = \`" + content + "\`;</script>\n";
                                                     html += toEncode;
                                                 }
-                                                fs.readFile("./view/index.html", null, (err, data3) => {
+                                                fs.readFile("./view/index_min.html", null, (err, data3) => {
                                                     html += data3;
                                                     zlib.gzip(html, function (_, result) {
                                                         res.end(result);
@@ -112,7 +111,7 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
                                         } else { // si pas de token, on passe la page de base
                                             let toEncode = "\n<script>var json = \`" + data + "\`; var jsonrep =  " + null + " ;</script>\n";
                                             html += toEncode;
-                                            fs.readFile("./view/index.html", null, (err, data3) => {
+                                            fs.readFile("./view/index_min.html", null, (err, data3) => {
                                                 html += data3;
                                                 zlib.gzip(html, function (_, result) {
                                                     cacheData = result;
