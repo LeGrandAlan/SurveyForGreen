@@ -14,12 +14,6 @@
         }
 
         #main {
-            /* Retour automatique à la ligne */
-            /*white-space: pre-wrap; !* Since CSS 2.1 *!*/
-            /*white-space: -moz-pre-wrap; !* Mozilla, since 1999 *!*/
-            /*white-space: -o-pre-wrap; !* Opera 7 *!*/
-            /*word-wrap: break-word; !* Internet Explorer 5.5+ *!*/
-
             white-space: pre-line;
 
             margin: 80px auto;
@@ -35,24 +29,14 @@
             color: #ffffff;
             background: #88d498;
             box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 6px;
-            border-radius: 6px;
             position: relative;
         }
 
         pre::before {
             content: attr(before);
-            /*position: absolute;
-            top: 0;right: 0;left: 0;
             font-size: 1.4em;
             background: #7abf89;
             padding: 10px;
-            border-top-left-radius: 6px;
-            border-top-right-radius: 6px;*/
-            font-size: 1.4em;
-            background: #7abf89;
-            padding: 10px;
-            border-top-left-radius: 6px;
-            border-top-right-radius: 6px;
             display: block;
             width: calc(100% + 20px);
             margin-left: -20px;
@@ -62,9 +46,6 @@
 
         pre::after {
             content: attr(after); /*'█'; '███████████████████████████████████';*/
-            /*TO DO : ceci est un template, le tout premier caractère doit etre mis à la place du suivant
-                        pour chaque id (si tu ne comprend pas attend que je me reveille cest compliqué à
-                        expliquer comme ça...)*/
 
             position: absolute;
             font-weight: bold;
@@ -87,7 +68,6 @@
             background: #43a689;
             opacity: 1;
             pointer-events: auto;
-            border-radius: 6px;
             box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 6px;
 
         }
@@ -100,7 +80,6 @@
             background: #43a689;
             opacity: 1;
             pointer-events: auto;
-            border-radius: 6px;
             position: absolute;
             margin-top: 15px;
             box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 6px;
@@ -120,6 +99,11 @@
         .sauv {
             right: 0;
             margin-right: 20%;
+        }
+
+        .download{
+            position: relative !important;
+            margin-left: calc(50% - 110px);
         }
 
         span.arrow:hover {
