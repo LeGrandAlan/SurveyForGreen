@@ -4,6 +4,19 @@
     json = JSON.parse(json);
 
 
+    let areYouReallySure = false;
+    function areYouSure() {
+        if(allowPrompt){
+            if (!areYouReallySure && true) {
+                return areYouReallySure = true;
+            }
+        }else{
+            allowPrompt = true;
+        }
+    }
+    let allowPrompt = true;
+    window.onbeforeunload = areYouSure;
+
     if (typeof token === "undefined") {
         var token = Math.random().toString(36).substring(2);
     }
@@ -30,6 +43,8 @@
                 body: JSON.stringify(reponsepar)
             });
             window.prompt("Formulaire à bien été enregistrée, vous pouvez maintement le recupérer ou le faire partager avec l'url suivante : ", document.location.href.substring(0, document.location.href.lastIndexOf("/")) + "/?token=" + token);
+            window.onbeforeunload = null;
+
         }
     }
 
