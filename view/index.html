@@ -79,10 +79,10 @@
         div.innerHTML += buttons;
         if (jsonrep == null) {
             jsonrep = "{\"token\":{\"i\":\"" + token + "\"},";
-            reponsepar = jsonrep.slice(0,-1);
+            reponsepar = jsonrep.slice(0, -1);
             reponsepar += "}";
             console.log(reponsepar);
-            reponsepar= JSON.parse(reponsepar);
+            reponsepar = JSON.parse(reponsepar);
         } else {
             jsonrep = jsonrep.slice(0, -1);
             jsonrep += ",";
@@ -99,7 +99,7 @@
                         }
                     );
                 } else {
-                    actualQuestionNumber = json[actualQuestionNumber].n ;
+                    actualQuestionNumber = json[actualQuestionNumber].n;
                 }
 
                 load();
@@ -131,7 +131,9 @@
 
         div.setAttribute("after", "█".repeat(actualQuestionNumber));
 
-        div.innerHTML = json[actualQuestionNumber].q;
+        div.innerHTML = "";
+        div.setAttribute('before', json[actualQuestionNumber].q);
+        //div.innerHTML = json[actualQuestionNumber].q;
         /*let reponse = jsonrep.slice(0, -1);
         reponse += "}";
         reponse=JSON.parse(reponse);*/
@@ -142,7 +144,7 @@
                     let choiceId = line.i;
                     let choiceText = line.t;
                     let nextQuestion = line.n;
-                    if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] == choiceId){
+                    if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] == choiceId) {
                         div.innerHTML +=
                             "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\" checked>" + choiceText;
                     } else {
@@ -290,7 +292,7 @@
                             }
                         }
                     }
-                    test= jsonrep.slice(0,-1);
+                    test = jsonrep.slice(0, -1);
                     test += "}";
                     test = JSON.parse(test);
                     if (reponsepar[Object.keys(test)[Object.keys(test).length -2 ]] == null ){
@@ -306,7 +308,7 @@
                         actualQuestionNumber = parseInt(questions[0].getAttribute("next"));
                         jsonrep += value + `"},`;
                     }
-                    test = jsonrep.slice(0,-1);
+                    test = jsonrep.slice(0, -1);
                     test += "}";
                     test = JSON.parse(test);
                     if (reponsepar[Object.keys(test)[Object.keys(test).length -2 ]] == null){
@@ -343,7 +345,7 @@
                             }
                         }
                     });
-                    test = jsonrep.slice(0,-1);
+                    test = jsonrep.slice(0, -1);
                     test += "}";
                     test = JSON.parse(test);
                     if (reponsepar[Object.keys(test)[Object.keys(test).length -2 ]] == null){
@@ -376,7 +378,7 @@
                     }
                     jsonrep = jsonrep.slice(0, -1);
                     jsonrep += `]},`;
-                    test = jsonrep.slice(0,-1);
+                    test = jsonrep.slice(0, -1);
                     test += "}";
                     test = JSON.parse(test);
                     if (reponsepar[Object.keys(test)[Object.keys(test).length -2 ]] == null){
@@ -426,7 +428,7 @@
                         i++;
                     }
 
-                    let testnb =0;
+                    let testnb = 0;
                     if (tab.length !== 0) {
                         actualQuestionNumber = json[actualQuestionNumber].n;
                         for (let i = 1; i <= tab.length; i++) {
@@ -477,7 +479,7 @@
         let reponse = jsonrep.slice(0, -1);
         reponse += "}";
 
-        reponse=JSON.parse(reponse);
+        reponse = JSON.parse(reponse);
         if (Object.keys(reponse).length === 1) {
             actualQuestionNumber = 0;
         } else {
