@@ -21,6 +21,7 @@
 
             margin: 80px auto;
             padding: 20px;
+            padding-top: 75px;
 
             text-align: justify;
             text-justify: inter-word;
@@ -36,6 +37,32 @@
             box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 6px;
             border-radius: 6px;
             position: relative;
+        }
+
+        pre::before {
+            content: 'testbefore';/*attr(before); TO DO : ajouter un attribut before au pre*/
+            position: absolute;
+            top: 0;right: 0;left: 0;
+            font-size: 2em;
+            background: #7abf89;
+            padding: 10px;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+        }
+        pre::after {
+            content: '█▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔▁▔█';/*attr(after); /*TO DO : ajouter un attribut before au pre*/
+            /*TO DO : ceci est un template, le tout premier caractère doit etre mis à la place de deux suivants
+                        pour chaque id (si tu ne comprend pas attend que je me reveille cest compliqué à
+                        expliquer comme ça...)*/
+
+            position: absolute;
+            color: #7abf89;
+            background: #43a689;
+            right: 18px;
+            left: 18px;
+            bottom: -60px;
+            border-width: 12px;
+            letter-spacing: -7.5px;
         }
 
         span.arrow {
@@ -60,7 +87,7 @@
             pointer-events: auto;
             border-radius: 6px;
             position: absolute;
-            left: 0px;
+            left: 0;
             margin-left: 20%;
             margin-top: 15px;
             box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 6px;
