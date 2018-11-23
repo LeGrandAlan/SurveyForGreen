@@ -86,17 +86,14 @@
         } else {
             jsonrep = jsonrep.slice(0, -1);
             jsonrep += ",";
-            let rep = jsonrep.slice(0,-1);
-            rep += "}";
-            rep =JSON.parse(rep);
             reponsepar = jsonrep.slice(0,-1);
             reponsepar += "}";
             reponsepar= JSON.parse(reponsepar);
-            if (rep.length !==1) {
-                actualQuestionNumber = (Object.keys(rep)[Object.keys(rep).length -2]);
+            if (Object.keys(reponsepar).length !==1) {
+                actualQuestionNumber = (Object.keys(reponsepar)[Object.keys(reponsepar).length -2]);
                 if (json[actualQuestionNumber].a == 1) {
                     (json[actualQuestionNumber].c).forEach((line) => {
-                            if (line.i == rep[Object.keys(rep)[0]].i) {
+                            if (line.i == reponsepar[Object.keys(reponsepar)[0]].i) {
                                 actualQuestionNumber = line.n;
                             }
                         }
