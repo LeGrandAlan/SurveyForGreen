@@ -3,6 +3,11 @@
 
     json = JSON.parse(json);
 
+
+    if (typeof token === "undefined") {
+        var token = Math.random().toString(36).substring(2);
+    }
+
     console.log("Token :" + token);
 
     let buttons = "\n\n\n<span class=\"arrow\" onclick=\"loadPrevious();\">&#xA0;&#8249;&#xA0;</span><button class='sauv' onclick='save();'>Save</button><button class='tel' onclick='downloadCSV();'>Download</button><span style='float: right' class=\"arrow\" onclick=\"loadNext();\">&#xA0;&#8250;&#xA0;</span>";
@@ -32,20 +37,20 @@
 
 
         let myInit = {
-            method: 'GET',
+            method: "GET",
             headers: myHeaders,
-            mode: 'cors',
-            cache: 'default'
+            mode: "cors",
+            cache: "default"
         };
 
-        let myRequest = new Request('?mdp=etienne&download=true', myInit);
+        let myRequest = new Request("?mdp=etienne&download=true", myInit);
 
         fetch(myRequest, myInit)
             .then(function (response) {
                 return response.blob();
             })
             .then(function (myBlob) {
-                console.log(myBlob);
+
                 let filename = "resultat.csv";
                 let file = myBlob;
                 if (window.navigator.msSaveOrOpenBlob) // IE10+
@@ -63,7 +68,6 @@
                     }, 0);
                 }
             });
-
     }
 
     function intro() {
@@ -77,7 +81,7 @@
         } else {
 
             let rep = JSON.parse(jsonrep);
-            actualQuestionNumber = Math.max(Object.keys(rep)[Object.keys(rep).length -2]);
+            actualQuestionNumber = Math.max(Object.keys(rep)[Object.keys(rep).length - 2]);
             if (json[actualQuestionNumber].a == 1) {
                 (json[actualQuestionNumber].c).forEach((line) => {
                         if (line.i == rep[Object.keys(rep)[0]].i) {
@@ -86,7 +90,7 @@
                     }
                 );
             } else {
-                actualQuestionNumber = json[actualQuestionNumber].n ;
+                actualQuestionNumber = json[actualQuestionNumber].n;
             }
 
             jsonrep = jsonrep.slice(0, -1);
@@ -115,23 +119,23 @@
         let questionType = json[actualQuestionNumber].a;
         let nextQuestion = json[actualQuestionNumber].n;
         //TODO: voir la taille max
-        div.setAttribute('questiontype', questionType);
+        div.setAttribute("questiontype", questionType);
 
-        div.setAttribute('after', "█".repeat(actualQuestionNumber));
+        div.setAttribute("after", "█".repeat(actualQuestionNumber));
 
         div.innerHTML = "";
         div.setAttribute('before', json[actualQuestionNumber].q);
         //div.innerHTML = json[actualQuestionNumber].q;
         let reponse = jsonrep.slice(0, -1);
         reponse += "}";
-        reponse=JSON.parse(reponse);
+        reponse = JSON.parse(reponse);
         if (questionType === 1) {
             let c = json[actualQuestionNumber].c;
             c.forEach((line) => {
                     let choiceId = line.i;
                     let choiceText = line.t;
                     let nextQuestion = line.n;
-                    if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] === choiceId){
+                    if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] === choiceId) {
                         div.innerHTML +=
                             "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\" checked>" + choiceText;
                     } else {
@@ -142,8 +146,8 @@
                 }
             );
         } else if (questionType === 2) {
-            if (reponse[actualQuestionNumber] != null){
-                div.innerHTML += "\n<input type=\"text\" name=\"" + actualQuestionNumber + "\" next=\"" + nextQuestion + "\" value=\""+ reponse[actualQuestionNumber]['t']+ "\">";
+            if (reponse[actualQuestionNumber] != null) {
+                div.innerHTML += "\n<input type=\"text\" name=\"" + actualQuestionNumber + "\" next=\"" + nextQuestion + "\" value=\"" + reponse[actualQuestionNumber]['t'] + "\">";
             } else {
                 div.innerHTML += "\n<input type=\"text\" name=\"" + actualQuestionNumber + "\" next=\"" + nextQuestion + "\">";
             }
@@ -154,10 +158,10 @@
                     let choiceId = line.i;
                     let choiceText = line.t;
                     if (line.f) {
-                        if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] === line.i){
+                        if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] === line.i) {
                             div.innerHTML +=
                                 "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\" checked>";
-                            div.innerHTML += choiceText + "<input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\"value= \""+ reponse[actualQuestionNumber]['t']+ "\" style='margin-left: 16px;'>";
+                            div.innerHTML += choiceText + "<input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\"value= \"" + reponse[actualQuestionNumber]['t'] + "\" style='margin-left: 16px;'>";
                         } else {
                             div.innerHTML +=
                                 "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\">";
@@ -165,7 +169,7 @@
                         }
 
                     } else {
-                        if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] === line.i){
+                        if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] === line.i) {
                             div.innerHTML +=
                                 "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\" checked>" + choiceText
                         } else {
@@ -190,18 +194,18 @@
             c.forEach((line) => {
                     let choiceId = line.i;
                     let choiceText = line.t;
-                    let reptext ;
+                    let reptext;
                     let trouver = false;
-                    if (reponse[actualQuestionNumber] != null){
-                        (reponse[actualQuestionNumber].a).forEach( (test) => {
-                            if (test.i === choiceId){
+                    if (reponse[actualQuestionNumber] != null) {
+                        (reponse[actualQuestionNumber].a).forEach((test) => {
+                            if (test.i === choiceId) {
                                 trouver = true;
                                 reptext = test.t;
                             }
                         });
                     }
 
-                    if (trouver){
+                    if (trouver) {
                         div.innerHTML += "\n" + choiceText + "<input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" next=\"" + nextQuestion + "\" value= \"" + reptext + "\">";
                     } else {
                         div.innerHTML += "\n" + choiceText + "<input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" next=\"" + nextQuestion + "\">";
@@ -215,18 +219,18 @@
                     let choiceText = line.t;
                     let reptext;
                     let trouver = false;
-                    if (reponse[actualQuestionNumber] != null){
-                        (reponse[actualQuestionNumber].a).forEach( (test) => {
-                            if (test.i === line.i){
+                    if (reponse[actualQuestionNumber] != null) {
+                        (reponse[actualQuestionNumber].a).forEach((test) => {
+                            if (test.i === line.i) {
                                 trouver = true;
                                 reptext = test.t;
                             }
                         });
                     }
-                    if (trouver){
+                    if (trouver) {
                         if (line['f']) {
                             div.innerHTML += "\n<input type=\"checkbox\" name=\"" + actualQuestionNumber + "\" value=\"" + choiceText + "\" id=\"" + choiceId + "\" next=\"" + nextQuestion + "\" checked>";
-                            div.innerHTML += choiceText + " <input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value = \""+ reptext +"\">";
+                            div.innerHTML += choiceText + " <input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value = \"" + reptext + "\">";
                         } else {
                             div.innerHTML +=
                                 "\n<input type=\"checkbox\" name=\"" + actualQuestionNumber + "\" value=\"" + choiceText + "\" id=\"" + choiceId + "\" next=\"" + nextQuestion + "\" checked>" + choiceText;
@@ -245,7 +249,7 @@
             );
         }
         delete reponse[actualQuestionNumber];
-        jsonrep=JSON.stringify(reponse);
+        jsonrep = JSON.stringify(reponse);
         jsonrep = jsonrep.slice(0, -1);
         jsonrep += ",";
         div.innerHTML += buttons;
@@ -288,7 +292,7 @@
                     findChecked = false;
                     let questionNumber = actualQuestionNumber;
                     questions.forEach((line) => {
-                        if (line.getAttribute('type') === "radio") {
+                        if (line.getAttribute("type") === "radio") {
                             if (line.checked) {
                                 value = line.getAttribute("value");
                                 findChecked = true;
@@ -378,17 +382,17 @@
                         i++;
                     }
 
-                    let testnb =0;
-                    if (tab.length !== 0){
+                    let testnb = 0;
+                    if (tab.length !== 0) {
                         actualQuestionNumber = json[actualQuestionNumber].n;
-                        for (let i = 1; i <= tab.length; i++){
+                        for (let i = 1; i <= tab.length; i++) {
                             if (tab[i - 1] === "non coche") {
                                 testnb++;
                             }
                         }
                         if (testnb == 6) {
                             jsonrep += `"` + beforeQuestion + `":{"a":[]},`;
-                        }else {
+                        } else {
                             jsonrep += `"` + beforeQuestion + `":{"a":[`;
                             for (let i = 1; i <= tab.length; i++) {
                                 if (tab[i - 1] === "non coche") {
@@ -405,7 +409,7 @@
                             jsonrep = jsonrep.slice(0, -1);
                             jsonrep += `]},`;
                             break;
-                    }
+                        }
 
                     }
             }
@@ -418,12 +422,12 @@
     function loadPrevious() {
         let reponse = jsonrep.slice(0, -1);
         reponse += "}";
-        reponse=JSON.parse(reponse);
+        reponse = JSON.parse(reponse);
         console.log(Object.keys(reponse).length);
         if (Object.keys(reponse).length === 1) {
             actualQuestionNumber = 0;
         } else {
-            actualQuestionNumber= Math.max(Object.keys(reponse)[Object.keys(reponse).length -2 ]);
+            actualQuestionNumber = Math.max(Object.keys(reponse)[Object.keys(reponse).length - 2]);
         }
         if (actualQuestionNumber === 0) {
             intro();

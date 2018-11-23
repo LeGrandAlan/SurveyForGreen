@@ -5,34 +5,32 @@
     <style>
 
 
-
-        body#body {
+        body {
             margin: 0;
             padding: 0 40px 0 40px;
 
             background-color: #c6dabf;
         }
 
-        pre#main {
+        #main {
             /* Retour automatique à la ligne */
-            white-space: pre-wrap; /* Since CSS 2.1 */
-            white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-            white-space: -o-pre-wrap; /* Opera 7 */
-            word-wrap: break-word; /* Internet Explorer 5.5+ */
+            /*white-space: pre-wrap; !* Since CSS 2.1 *!*/
+            /*white-space: -moz-pre-wrap; !* Mozilla, since 1999 *!*/
+            /*white-space: -o-pre-wrap; !* Opera 7 *!*/
+            /*word-wrap: break-word; !* Internet Explorer 5.5+ *!*/
 
             white-space: pre-line;
 
             margin: 80px auto;
             padding: 20px 20px 20px;
 
-            /*text-align: justify;
-            text-justify: inter-word;*/
+            text-align: justify;
+            text-justify: inter-word;
 
             width: 100%;
             max-width: 800px;
             min-width: 400px;
-            --width : 100%;
-            font-family: 'Arimo', sans-serif;
+            font-family: sans-serif;
             font-weight: 600;
             color: #ffffff;
             background: #88d498;
@@ -61,8 +59,9 @@
             position: relative;
             top: -20px;
         }
+
         pre::after {
-            content: attr(after);/*'█'; '███████████████████████████████████';*/
+            content: attr(after); /*'█'; '███████████████████████████████████';*/
             /*TO DO : ceci est un template, le tout premier caractère doit etre mis à la place du suivant
                         pour chaque id (si tu ne comprend pas attend que je me reveille cest compliqué à
                         expliquer comme ça...)*/
@@ -113,12 +112,12 @@
             background: #678c99;
         }
 
-        button.tel {
+        .tel {
             left: 0;
             margin-left: 20%;
         }
 
-        button.sauv {
+        .sauv {
             right: 0;
             margin-right: 20%;
         }
