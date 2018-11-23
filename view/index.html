@@ -15,25 +15,27 @@
     let downloadButton = "<button class='tel download' onclick='downloadCSV();'>Download survey results</button>";
     let actualQuestionNumber = 0;
 
+    /**
+     * Sauvegarde les données enregistrées par l'utilisateur dans un fichier JSON portant comme nom le Token généré
+     * @entrée:  utilise la variable reponsepar (reponse json parsé)
+     */
     function save() {
         if (jsonrep == null) {
             window.alert("Formulaire non enregistrée car il faut validée au moins la première question");
         } else {
-            /* = jsonrep.slice(0, -1);
-            jsonrep += "}";*/
             fetch(document.location.href, {
                 onclick,
                 headers: new Headers({"Accept": "application/json"}),
                 method: "POST",
                 body: JSON.stringify(reponsepar)
             });
-            /*jsonrep = jsonrep.slice(0, -1);
-            jsonrep += ",";*/
             window.prompt("Formulaire à bien été enregistrée, vous pouvez maintement le recupérer ou le faire partager avec l'url suivante : ", document.location.href.substring(0, document.location.href.lastIndexOf("/")) + "/?token=" + token);
-
         }
     }
 
+    /**
+     * Enregistrement (côté client) du fichier CSV contenant toutes les réponses de tout les questionaires terminés
+     */
     function downloadCSV() {
         let myHeaders = new Headers();
 
@@ -72,11 +74,13 @@
             });
     }
 
+    /**
+     * Affiche la page d'introduction du sondage avec les bouttons
+     */
     function intro() {
         let div = document.getElementById("main");
         div.setAttribute('before', "Introduction");
 
-        //TODO: compresser le texte
         div.innerHTML = "With the support of ADEME, the Ministry of Ecology, Energy and the Sea and the Ministry of Economy and Finance, the association AGIT (Alliance for Green IT) and the eco-organizations of the recycling network of Waste Electrical and Electronic Equipment (WEEE) organize a survey to assess the deposits of computer and office equipment present in companies and more generally on the maturity of companies in France in the use of eco-responsible digital services. The duration of the questionnaire is estimated at 15 minutes if you are able to answer questions directly. You can return at any time on the questionnaire, answer in several times, your previous answers are recorded. In case of modification, only the last answer will be taken into account. You can submit this questionnaire to several people in your organization. All you have to do is simply share the link to the questionnaire. Thank you for participating in this survey. Your answer is invaluable to us to constitute the most representative sample of the companies in France.";
         div.innerHTML += buttons;
         if (jsonrep == null) {
@@ -93,9 +97,9 @@
             reponsepar= JSON.parse(reponsepar);
             if (Object.keys(reponsepar).length !==1) {
                 actualQuestionNumber = (Object.keys(reponsepar)[Object.keys(reponsepar).length -2]);
-                if (json[actualQuestionNumber].a == 1) {
+                if (json[actualQuestionNumber].a === 1) {
                     (json[actualQuestionNumber].c).forEach((line) => {
-                            if (line.i == reponsepar[Object.keys(reponsepar)[0]].i) {
+                            if (line.i === reponsepar[Object.keys(reponsepar)[0]].i) {
                                 actualQuestionNumber = line.n;
                             }
                         }
@@ -103,16 +107,15 @@
                 } else {
                     actualQuestionNumber = json[actualQuestionNumber].n;
                 }
-
                 load();
             }
-
         }
-
     }
 
+    /**
+     * Affiche la page de conclusion avec le boutton de téléchargement de tout les enregistrements
+     */
     function conclusion() {
-
         fetch(document.location.href, {
             onclick,
             headers: new Headers({"Accept": "application/json"}),
@@ -128,29 +131,30 @@
 
     }
 
+    /**
+     * Charge l'affichage des question et des éventuelles réponses déjà enregistrées
+     */
     function load() {
         let div = document.getElementById("main");
         let questionType = json[actualQuestionNumber].a;
         let nextQuestion = json[actualQuestionNumber].n;
-        //TODO: voir la taille max
+
         div.setAttribute("questiontype", questionType);
 
         div.setAttribute("after", "█".repeat(actualQuestionNumber));
 
         div.innerHTML = "";
         div.setAttribute('before', json[actualQuestionNumber].q);
-        //div.innerHTML = json[actualQuestionNumber].q;
-        /*let reponse = jsonrep.slice(0, -1);
-        reponse += "}";
-        reponse=JSON.parse(reponse);*/
+
         let reponse = reponsepar;
+        // Type de question : Single choice
         if (questionType === 1) {
             let c = json[actualQuestionNumber].c;
             c.forEach((line) => {
                     let choiceId = line.i;
                     let choiceText = line.t;
                     let nextQuestion = line.n;
-                    if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] == choiceId) {
+                    if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] === choiceId) {
                         div.innerHTML +=
                             "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\" checked>" + choiceText;
                     } else {
@@ -160,20 +164,21 @@
 
                 }
             );
+        // Type de question : Text
         } else if (questionType === 2) {
             if (reponse[actualQuestionNumber] != null){
                 div.innerHTML += "\n<input type=\"text\" name=\"" + actualQuestionNumber + "\" next=\"" + nextQuestion + "\" value=\""+ reponse[actualQuestionNumber]['t']+ "\">";
             } else {
                 div.innerHTML += "\n<input type=\"text\" name=\"" + actualQuestionNumber + "\" next=\"" + nextQuestion + "\">";
             }
-
+        // Type de question : Single choice + text
         } else if (questionType === 3) {
             let c = json[actualQuestionNumber].c;
             c.forEach((line) => {
                     let choiceId = line.i;
                     let choiceText = line.t;
                     if (line.f) {
-                        if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] == line.i){
+                        if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] === line.i){
                             div.innerHTML +=
                                 "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\" checked>";
                             div.innerHTML += choiceText + "<input type=\"text\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\"value= \""+ reponse[actualQuestionNumber]['t']+ "\">";
@@ -184,7 +189,7 @@
                         }
 
                     } else {
-                        if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] == line.i){
+                        if (reponse[actualQuestionNumber] != null && reponse[actualQuestionNumber]["i"] === line.i){
                             div.innerHTML +=
                                 "\n<input type=\"radio\" name=\"" + actualQuestionNumber + "\" id=\"" + choiceId + "\" value=\"" + choiceId + "\" next=\"" + nextQuestion + "\" checked>" + choiceText
                         } else {
@@ -194,6 +199,7 @@
                     }
                 }
             );
+        // Type de question : Multiple choice
         } else if (questionType === 4) {
             let c = json[actualQuestionNumber].c;
             c.forEach((line) => {
@@ -204,6 +210,7 @@
                         "\n<input type=\"checkbox\" name=\"" + actualQuestionNumber + "\" value=\"" + choiceText + "\" id=\"" + choiceId + "\" next=\"" + nextQuestion + "\">" + choiceText;
                 }
             );
+        // Type de question : Multiple text
         } else if (questionType === 5) {
             let c = json[actualQuestionNumber].c;
             c.forEach((line) => {
@@ -213,7 +220,7 @@
                     let trouver = false;
                     if (reponse[actualQuestionNumber] != null){
                         (reponse[actualQuestionNumber].a).forEach( (test) => {
-                            if (test.i == choiceId){
+                            if (test.i === choiceId){
                                 trouver = true;
                                 reptext = test.t;
                             }
@@ -227,7 +234,8 @@
                     }
                 }
             );
-        } else if (questionType === 6) { //TODO: débuger car affichage en texte q87
+        // Type de question : Multiple choice + text
+        } else if (questionType === 6) {
             let c = json[actualQuestionNumber].c;
             c.forEach((line) => {
                     let choiceId = line.i;
@@ -273,6 +281,10 @@
         div.innerHTML += buttons;
     }
 
+    /**
+     * Récupère et valide les réponses mise dans la question courante et passe à la suivante
+     * en fonction de l'arbre de décision (saut de plusieurs questions)
+     */
     function loadNext() {
         if (actualQuestionNumber === 0) {
             actualQuestionNumber = 1;
@@ -423,7 +435,7 @@
                                 value = line.value;
                                 if (value === "") {
                                     actualQuestionNumber = beforeQuestion;
-                                    tab.push("tableau incorrect");//TODO: voir si meilleure solution
+                                    tab.push("tableau incorrect");
                                 } else {
                                     tab.splice(-1, 1);
                                     tab.push(value);
@@ -442,7 +454,7 @@
                                 testnb++;
                             }
                         }
-                        if (testnb == 6) {
+                        if (testnb === 6) {
                             jsonrep += `"` + beforeQuestion + `":{"a":[]},`;
                         } else {
                             jsonrep += `"` + beforeQuestion + `":{"a":[`;
@@ -481,6 +493,9 @@
         }
     }
 
+    /**
+     * Charge la question précédente en fonction de l'arbre de décision (saut de plusieurs questions)
+     */
     function loadPrevious() {
         let reponse = jsonrep.slice(0, -1);
         reponse += "}";
@@ -493,7 +508,6 @@
         }
         if (actualQuestionNumber === 0) {
             intro();
-            //conclusion()
         } else {
             load();
         }
