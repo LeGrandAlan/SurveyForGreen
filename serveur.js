@@ -16,7 +16,7 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
 
     if (url.parse(req.url).href.includes(".php") || ipBloque.includes(req.connection.remoteAddress)) {
         console.log("Bloquage de requête ! :");
-        let date = new Date().toLocaleTimeString('en-US', {
+        let date = new Date().toLocaleTimeString("en-US", {
             hour12: false,
             hour: "numeric",
             minute: "numeric"
@@ -26,7 +26,7 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
     } else {
         // ------------------ Parsing de l'url -----------------------------
         let page = url.parse(req.url).pathname; // On parse le nom dans l'url
-        let date = new Date().toLocaleTimeString('en-US', {
+        let date = new Date().toLocaleTimeString("en-US", {
             hour12: false,
             hour: "numeric",
             minute: "numeric"
@@ -39,18 +39,23 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
         if (req.method === "POST") {
             let lejson = "";
             req.on("data", (chunk) => {
-                fs.writeFileSync("data/jsonanswer/" + (((JSON.parse(chunk.toString()))["token"])['i']) + ".json", chunk.toString(), "UTF-8");
-                if (((JSON.parse(chunk.toString()))["88"]) != null) {
-                    jsontocsv.jsonToCsv((JSON.parse(chunk.toString()))["token"]['i'], "./data/megafile.csv");
+                try {
+                    fs.writeFileSync("data/jsonanswer/" + (((JSON.parse(chunk.toString()))["token"])['i']) + ".json", chunk.toString(), "UTF-8");
+                    if (((JSON.parse(chunk.toString()))["88"]) != null) {
+                        jsontocsv.jsonToCsv((JSON.parse(chunk.toString()))["token"]['i'], "./data/megafile.csv");
+                    }
+                    res.writeHead(202);
+                    res.end();
+                } catch (e) {
+                    res.writeHead(500);
+                    res.end();
                 }
-                res.writeHead(202);
-                res.end();
             });
         } else {
 
 
             // ------------------ Chargement d'une page avec condition -----------------------------
-            if (page === "/" && params["mdp"] === "etienne") { // Si le nom est '/'
+            if (page === "/") { // Si le nom est '/'
 
 
                 // // ------------------ Création d'une page avec des infos contenu dans l'URL -----------------------------
@@ -123,14 +128,14 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
 
 
             } else if (page === '/favicon.ico') {
-                res.writeHead(200, {'Content-Type': 'image/x-icon'});
-                // res.writeHead(410);
+                // res.writeHead(200, {'Content-Type': 'image/x-icon'});
+                res.writeHead(410);
                 res.end();
             } else {
                 // TODO : remettre
-                // res.writeHead(404, {"Content-Type": "text/plain"});
-                res.writeHead(202, {"Content-Type": "text/html"});
-                res.end("<img src='https://media0.giphy.com/media/ZXlDOOsfV0a8U/giphy.gif?cid=e1bb72ff5bf6a90b36514e32554350fe'> ");
+                res.writeHead(404, {"Content-Type": "text/plain"});
+                // res.writeHead(202, {"Content-Type": "text/html"});
+                // res.end("<img src='https://media0.giphy.com/media/ZXlDOOsfV0a8U/giphy.gif?cid=e1bb72ff5bf6a90b36514e32554350fe'> ");
             }
         }
     }
