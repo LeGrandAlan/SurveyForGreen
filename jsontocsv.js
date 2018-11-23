@@ -17,7 +17,7 @@ const jsontocsv = {
                 } else string += ";";
             }
             string += "\n";
-            string = string.replace(/\"[it]\":/g, '');
+            string = string.replace(/\"[ait]\":/g, '');
             fs.appendFile(megaCsvPath, string, (err) => {
                 if (err) throw err;
                 fs.unlink("./data/jsonanswer/" + token + ".json", function (err) {
