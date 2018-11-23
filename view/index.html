@@ -28,7 +28,7 @@
             });
             /*jsonrep = jsonrep.slice(0, -1);
             jsonrep += ",";*/
-            window.prompt("Formulaire à bien été enregistrée, vous pouvez maintement le recupérer ou le faire partager avec l'url suivante : ", document.location.href.substring(0, document.location.href.lastIndexOf("/")) + "/?mdp=etienne&token=" + token);
+            window.prompt("Formulaire à bien été enregistrée, vous pouvez maintement le recupérer ou le faire partager avec l'url suivante : ", document.location.href.substring(0, document.location.href.lastIndexOf("/")) + "/?token=" + token);
 
         }
     }
@@ -44,7 +44,7 @@
             cache: "default"
         };
 
-        let myRequest = new Request("?mdp=etienne&download=true", myInit);
+        let myRequest = new Request("?download=true", myInit);
 
         fetch(myRequest, myInit)
             .then(function (response) {
