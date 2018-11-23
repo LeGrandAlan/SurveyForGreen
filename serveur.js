@@ -123,8 +123,8 @@ let server = http.createServer(function (req, res) { // On reçoit la demande de
 
 
             } else if (page === '/favicon.ico') {
-                // res.writeHead(200, {'Content-Type': 'image/x-icon'});
-                res.writeHead(404);
+                res.writeHead(200, {'Content-Type': 'image/x-icon'});
+                // res.writeHead(410);
                 res.end();
             } else {
                 // TODO : remettre
