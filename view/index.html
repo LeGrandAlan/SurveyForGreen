@@ -5,7 +5,7 @@
 
     console.log("Token :" + token);
 
-    let buttons = "\n\n\n<span class=\"arrow\" onclick=\"loadPrevious();\">&#xA0;&#8249;&#xA0;</span><button class='sauv' onclick='save();'>Sauvegarder</button><button class='tel' onclick='downloadCSV();'>Télécharger</button><span style='float: right' class=\"arrow\" onclick=\"loadNext();\">&#xA0;&#8250;&#xA0;</span>";
+    let buttons = "\n\n\n<span class=\"arrow\" onclick=\"loadPrevious();\">&#xA0;&#8249;&#xA0;</span><button class='sauv' onclick='save();'>Save</button><button class='tel' onclick='downloadCSV();'>Download</button><span style='float: right' class=\"arrow\" onclick=\"loadNext();\">&#xA0;&#8250;&#xA0;</span>";
     let actualQuestionNumber = 0;
 
     function save() {
@@ -20,6 +20,8 @@
                 method: "POST",
                 body: jsonrep
             });
+            jsonrep = jsonrep.slice(0, -1);
+            jsonrep += ",";
             window.prompt("Formulaire à bien été enregistrée, vous pouvez maintement le recupérer ou le faire partager avec l'url suivante : ", document.location.href.substring(0, document.location.href.lastIndexOf("/")) + "/?mdp=etienne&token=" + token);
 
         }
@@ -94,8 +96,17 @@
     }
 
     function conclusion() {
+        jsonrep = jsonrep.slice(0, -1);
+        jsonrep += "}";
+        fetch(document.location.href, {
+            onclick,
+            headers: new Headers({"Accept": "application/json"}),
+            method: "POST",
+            body: jsonrep
+        });
         let div = document.getElementById("main");
-        div.innerHTML = "Merci de votre paricipation";
+        div.innerHTML = "Thank you for your participation";
+
     }
 
     function load() {
@@ -338,7 +349,7 @@
                                 value = line.getAttribute("id");
                                 let value_text = line.getAttribute("value");
                                 findChecked = true;
-                                actualQuestionNumber = parseInt(line.getAttribute("next"));
+
                                 if (value === "") {
                                     tab.push("");
                                 } else {
@@ -363,32 +374,36 @@
                         }
                         i++;
                     }
-                    actualQuestionNumber = json[actualQuestionNumber].n;
+
                     let testnb =0;
-                    for (let i = 1; i <= tab.length; i++){
-                        if (tab[i - 1] === "non coche") {
-                            testnb++;
-                        }
-                    }
-                    if (testnb == 6) {
-                        jsonrep += `"` + beforeQuestion + `":{"a":[]},`;
-                    }else {
-                        jsonrep += `"` + beforeQuestion + `":{"a":[`;
-                        for (let i = 1; i <= tab.length; i++) {
+                    if (tab.length !== 0){
+                        actualQuestionNumber = json[actualQuestionNumber].n;
+                        for (let i = 1; i <= tab.length; i++){
                             if (tab[i - 1] === "non coche") {
-                                continue;
-                            } else if (tab[i - 1] !== "") {
-                                jsonrep += `{"i":` + i + `,"t":`;
-                                jsonrep += `"` + tab[i - 1] + `"`;
-                            } else {
-                                jsonrep += `{"i":` + i + `,"t":`;
-                                jsonrep += `""`;
+                                testnb++;
                             }
-                            jsonrep += `},`;
                         }
-                        jsonrep = jsonrep.slice(0, -1);
-                        jsonrep += `]},`;
-                        break;
+                        if (testnb == 6) {
+                            jsonrep += `"` + beforeQuestion + `":{"a":[]},`;
+                        }else {
+                            jsonrep += `"` + beforeQuestion + `":{"a":[`;
+                            for (let i = 1; i <= tab.length; i++) {
+                                if (tab[i - 1] === "non coche") {
+                                    continue;
+                                } else if (tab[i - 1] !== "") {
+                                    jsonrep += `{"i":` + i + `,"t":`;
+                                    jsonrep += `"` + tab[i - 1] + `"`;
+                                } else {
+                                    jsonrep += `{"i":` + i + `,"t":`;
+                                    jsonrep += `""`;
+                                }
+                                jsonrep += `},`;
+                            }
+                            jsonrep = jsonrep.slice(0, -1);
+                            jsonrep += `]},`;
+                            break;
+                    }
+
                     }
             }
         }
