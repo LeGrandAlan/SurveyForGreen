@@ -104,6 +104,9 @@
         let nextQuestion = json[actualQuestionNumber].n;
         //TODO: voir la taille max
         div.setAttribute('questiontype', questionType);
+
+        div.setAttribute('after', "█".repeat(actualQuestionNumber));
+
         div.innerHTML = json[actualQuestionNumber].q;
         let reponse = jsonrep.slice(0, -1);
         reponse += "}";
